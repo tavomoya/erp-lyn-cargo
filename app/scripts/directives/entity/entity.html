@@ -1,0 +1,88 @@
+<form class="form-horizontal" role="form" name="entityForm">
+	<div class="form-group">
+		<label class="col-xs-2 control-label">Tipo de {{type}}:</label>
+		<div class="col-xs-4">
+			<select class="form-control" name="type" ng-model="entity.type" ng-options="t for t in entityTypes">
+			</select>
+		</div>
+	</div>
+	<hr>
+	<div class="form-group" ng-if="entity.type == 'Empresa'">
+		<label class="col-xs-2 control-label">Nombre:</label>
+		<div class="col-xs-4">
+			<input type="text" class="form-control" name="companyName" id="companyName" ng-model="entity.companyName" placeholder="Ingrese el nombre de la empresa"
+			required>
+		</div>
+	</div>
+	<div class="form-group" ng-if="entity.type == 'Persona'">
+		<label class="col-xs-2 control-label">Nombre:</label>
+		<div class="col-xs-4">
+			<input type="text" class="form-control" name="firstName" id="firstName" ng-model="entity.firstName" placeholder="Ingrese el nombre"
+			required>
+		</div>
+	</div>
+	<div class="form-group" ng-if="entity.type == 'Persona'">
+		<label class="col-xs-2 control-label">Apellido:</label>
+		<div class="col-xs-4">
+			<input type="text" class="form-control" name="lastName" id="lastName" ng-model="entity.lastName" placeholder="Ingrese el apellido"
+			required>
+		</div>
+	</div>
+	<div class="form-group" ng-if="entity.type == 'Persona'">
+		<label class="col-xs-2 control-label">Fecha de Nacimiento:</label>
+		<div class="col-xs-2">
+			<input type="date" class="form-control" name="birthDate" id="birthDate" ng-model="entity.birthDate" required>
+		</div>
+	</div>
+	<hr>
+	<div class="form-group" ng-if="entity.type == 'Persona'">
+		<label class="col-xs-2 control-label">Tipo de Documento:</label>
+		<div class="col-xs-4">
+			<select class="form-control" name="documentType" ng-model="entity.documentType" ng-options="dt for dt in documentTypes"></select>
+		</div>
+	</div>
+	<div class="form-group" ng-if="entity.type == 'Persona'">
+		<label class="col-xs-2 control-label">Documento de Identidad:</label>
+		<div class="col-xs-4">
+			<input type="text" class="form-control" name="documentNumber" id="documentNumber" ng-model="entity.documentNumber" required>
+		</div>
+	</div>
+	<div class="form-group" ng-if="entity.type == 'Empresa'">
+		<label class="col-xs-2 control-label">No. RNC:</label>
+		<div class="col-xs-4">
+			<input type="text" class="form-control" name="companyRnc" id="companyRnc" ng-model="entity.companyRnc" required>
+		</div>
+	</div>
+	<hr>
+	<div class="form-group" ng-if="entity.type == 'Empresa'">
+		<label class="col-xs-2 control-label">Contactp:</label>
+		<div class="col-xs-4">
+			<input type="text" class="form-control" name="contact" id="contact" ng-model="entity.contact" required>
+		</div>
+	</div>
+	<div class="form-group" ng-if="entity.type == 'Empresa'">
+		<label class="col-xs-2 control-label">Tel&eacute;fono de Contacto:</label>
+		<div class="col-xs-4">
+			<input type="tel" class="form-control" name="contactPhone" id="contactPhone" ng-model="entity.contactPhone" required>
+		</div>
+	</div>
+	<hr ng-if="entity.type == 'Empresa'">		
+	<div class="form-group">
+		<label class="col-xs-2 control-label">Direcci&oacute;n:</label>
+		<div class="col-xs-4">
+			<textarea class="form-control" name="address" ng-model="entity.address"></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-2 control-label">Tel&eacute;fono:</label>
+		<div class="col-xs-4">
+			<input type="tel" class="form-control" name="phone" id="phone" ng-model="entity.phone" required>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-xs-2 control-label">Correo Electr&oacute;nico:</label>
+		<div class="col-xs-4">
+			<input type="email" class="form-control" name="email" id="email" ng-model="entity.email" required>
+		</div>
+	</div>
+</form>

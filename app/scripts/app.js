@@ -99,7 +99,17 @@ angular
     })
       .state('dashboard.client',{
         templateUrl:'views/pages/client.html',
-        url:'/client'
+        url:'/client',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'erpLynCargoApp',
+              files:[
+              'scripts/directives/entity/entity.js',
+              ]
+            })
+          }
+        }
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
