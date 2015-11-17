@@ -85,4 +85,38 @@
 			<input type="email" class="form-control" name="email" id="email" ng-model="entity.email" required>
 		</div>
 	</div>
+	<hr>
+	<!-- En caso de que sea cliente o proveedor -->
+	<div class="form-group" ng-if="type != 'Agente'">
+		<label class="col-xs-2 control-label">Moneda:</label>
+		<div class="col-xs-4">
+			<select class="form-control" name="currency" ng-model="entity.currency">
+				<option>DOP - Dominican Peso</option>
+				<option>USD - United States Dollar</option>
+				<option>EUR - Euro</option>
+			</select>
+		</div>
+	</div>	
+	<div class="form-group" ng-if="type != 'Agente'">
+		<label class="col-xs-2 control-label">M&eacute;todo de Pago:</label>
+		<div class="col-xs-4">
+			<select class="form-control" name="paymentMethod" ng-model="entity.paymentMethod">
+				<option>Cheque</option>
+				<option>Efectivo</option>
+				<option>Tarjeta de Cr&eacute;dito</option>
+			</select>
+		</div>
+	</div>
+	<!-- En caso de que sea un agente -->
+	<div class="form-group" ng-if="type == 'Agente'">
+		<label class="col-xs-2 control-label">Mercado en el que opera:</label>
+		<div class="col-xs-4">
+			<select class="form-control" name="market" ng-model="entity.market">
+				<option>Am&eacute;rica del Norte</option>
+				<option>Am&eacute;rica del Sur</option>
+				<option>Am&eacute;rica Central</option>
+				<option>El Caribe</option>
+			</select>
+		</div>
+	</div>	
 </form>

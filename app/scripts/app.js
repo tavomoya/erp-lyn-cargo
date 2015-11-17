@@ -111,6 +111,34 @@ angular
           }
         }
     })
+    .state('dashboard.vendor',{
+        templateUrl:'views/pages/vendor.html',
+        url:'/vendor',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'erpLynCargoApp',
+              files:[
+              'scripts/directives/entity/entity.js',
+              ]
+            })
+          }
+        }
+    })
+    .state('dashboard.agent',{
+        templateUrl:'views/pages/agent.html',
+        url:'/agent',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'erpLynCargoApp',
+              files:[
+              'scripts/directives/entity/entity.js',
+              ]
+            })
+          }
+        }
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
