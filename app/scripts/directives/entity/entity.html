@@ -1,12 +1,12 @@
 <form class="form-horizontal" role="form" name="entityForm">
-	<div class="form-group">
+	<div class="form-group" ng-if="type != 'Agente' && type != 'Empleado'">
 		<label class="col-xs-2 control-label">Tipo de {{type}}:</label>
 		<div class="col-xs-4">
 			<select class="form-control" name="type" ng-model="entity.type" ng-options="t for t in entityTypes">
 			</select>
 		</div>
 	</div>
-	<hr>
+	<hr ng-if="type != 'Agente' && type != 'Empleado'">
 	<div class="form-group" ng-if="entity.type == 'Empresa'">
 		<label class="col-xs-2 control-label">Nombre:</label>
 		<div class="col-xs-4">
@@ -14,34 +14,34 @@
 			required>
 		</div>
 	</div>
-	<div class="form-group" ng-if="entity.type == 'Persona'">
+	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
 		<label class="col-xs-2 control-label">Nombre:</label>
 		<div class="col-xs-4">
 			<input type="text" class="form-control" name="firstName" id="firstName" ng-model="entity.firstName" placeholder="Ingrese el nombre"
 			required>
 		</div>
 	</div>
-	<div class="form-group" ng-if="entity.type == 'Persona'">
+	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
 		<label class="col-xs-2 control-label">Apellido:</label>
 		<div class="col-xs-4">
 			<input type="text" class="form-control" name="lastName" id="lastName" ng-model="entity.lastName" placeholder="Ingrese el apellido"
 			required>
 		</div>
 	</div>
-	<div class="form-group" ng-if="entity.type == 'Persona'">
+	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
 		<label class="col-xs-2 control-label">Fecha de Nacimiento:</label>
 		<div class="col-xs-2">
 			<input type="date" class="form-control" name="birthDate" id="birthDate" ng-model="entity.birthDate" required>
 		</div>
 	</div>
 	<hr>
-	<div class="form-group" ng-if="entity.type == 'Persona'">
+	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
 		<label class="col-xs-2 control-label">Tipo de Documento:</label>
 		<div class="col-xs-4">
 			<select class="form-control" name="documentType" ng-model="entity.documentType" ng-options="dt for dt in documentTypes"></select>
 		</div>
 	</div>
-	<div class="form-group" ng-if="entity.type == 'Persona'">
+	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
 		<label class="col-xs-2 control-label">Documento de Identidad:</label>
 		<div class="col-xs-4">
 			<input type="text" class="form-control" name="documentNumber" id="documentNumber" ng-model="entity.documentNumber" required>
@@ -55,7 +55,7 @@
 	</div>
 	<hr>
 	<div class="form-group" ng-if="entity.type == 'Empresa'">
-		<label class="col-xs-2 control-label">Contactp:</label>
+		<label class="col-xs-2 control-label">Contacto:</label>
 		<div class="col-xs-4">
 			<input type="text" class="form-control" name="contact" id="contact" ng-model="entity.contact" required>
 		</div>
@@ -87,7 +87,7 @@
 	</div>
 	<hr>
 	<!-- En caso de que sea cliente o proveedor -->
-	<div class="form-group" ng-if="type != 'Agente'">
+	<div class="form-group" ng-if="type != 'Agente' && type != 'Empleado'">
 		<label class="col-xs-2 control-label">Moneda:</label>
 		<div class="col-xs-4">
 			<select class="form-control" name="currency" ng-model="entity.currency">
@@ -97,7 +97,7 @@
 			</select>
 		</div>
 	</div>	
-	<div class="form-group" ng-if="type != 'Agente'">
+	<div class="form-group" ng-if="type != 'Agente' && type != 'Empleado'">
 		<label class="col-xs-2 control-label">M&eacute;todo de Pago:</label>
 		<div class="col-xs-4">
 			<select class="form-control" name="paymentMethod" ng-model="entity.paymentMethod">

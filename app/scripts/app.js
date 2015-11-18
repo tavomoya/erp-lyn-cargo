@@ -139,6 +139,22 @@ angular
           }
         }
     })
+    .state('dashboard.employee',{
+        templateUrl:'views/pages/employee.html',
+        url:'/employee',
+        controller: 'EmployeeCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'erpLynCargoApp',
+              files:[
+              'scripts/directives/entity/entity.js',
+              'scripts/controllers/employee.js'
+              ]
+            })
+          }
+        }
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
