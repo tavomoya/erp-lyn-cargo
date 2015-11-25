@@ -1,0 +1,70 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Cuentas</h1>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel panel-heading">
+				Informaci&oacute;n de la cuenta
+			</div>	
+			<div class="panel panel-body">
+				<form class="form-horizontal" role="form" name="accountForm">
+					<div class="form-group">
+						<label class="col-xs-3 control-label" for="type">Tipo de Cuenta:</label>
+						<div class="col-xs-3">
+							<select class="form-control" name="type" id="type" ng-model="account.accountType" required>
+								<option>Tipos de cuenta</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-3 control-label" for="number">N&uacute;mero de Cuenta:</label>
+						<div class="col-xs-3">
+							<input type="text" class="form-control" name="number" id="number" ng-model="account.number" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-3 control-label" for="name">Nombre de la Cuenta:</label>
+						<div class="col-xs-3">
+							<input type="text" class="form-control" name="name" id="name" ng-model="account.name" required>
+						</div>
+					</div>	
+					<div class="form-group">
+						<label class="col-xs-3 control-label" for="superAccount">Cuenta Padre:</label>
+						<div class="col-xs-3">
+							<select class="form-control" name="superAccount" id="superAccount" ng-model="account.superAccount" required>
+								<option>Cuentas del tipo que se selecciono</option>
+							</select>
+						</div>
+					</div>	
+					<div class="form-group">
+						<label class="col-xs-3 control-label" for="currency">Moneda:</label>
+						<div class="col-xs-3">
+							<select class="form-control" name="currency" id="currency" ng-model="account.currency" required>
+								<option>Se selecciona una moneda</option>
+							</select>
+						</div>
+					</div>
+					<!-- En caso de que se escoja tipo Banco -->
+					<div class="form-group">
+						<label class="col-xs-3 control-label" for="bankAssociated">Banco:</label>
+						<div class="col-xs-3">
+							<select class="form-control" name="bankAssociated" id="bankAssociated" ng-model="account.bankAssociated" required>
+								<option>En caso de que el tipo de cuenta sea banco, se escoge uno</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-3 control-label" for="bankAccountNumber">N&uacute;mero de Cuenta en el Banco:</label>
+						<div class="col-xs-3">
+							<input type="text" class="form-control" name="bankAccountNumber" id="bankAccountNumber" ng-model="account.bankAccountNumber" required>
+						</div>
+					</div>	
+				</form>
+			</div>	
+		</div>		
+	</div>
+</div>

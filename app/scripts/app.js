@@ -155,6 +155,30 @@ angular
           }
         }
     })
+    .state('dashboard.item',{
+        templateUrl:'views/pages/item.html',
+        url:'/item'
+        // controller: 'EmployeeCtrl',
+        // resolve: {
+        //   loadMyFiles:function($ocLazyLoad) {
+        //     return $ocLazyLoad.load({
+        //       name:'erpLynCargoApp',
+        //       files:[
+        //       'scripts/directives/entity/entity.js',
+        //       'scripts/controllers/employee.js'
+        //       ]
+        //     })
+        //   }
+        // }
+    })
+    .state('dashboard.account',{
+        templateUrl:'views/pages/account.html',
+        url:'/account'
+    })
+    .state('dashboard.invoice',{
+        templateUrl:'views/pages/invoice.html',
+        url:'/invoice'
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'

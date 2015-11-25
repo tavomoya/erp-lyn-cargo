@@ -88,7 +88,16 @@
                     </li>
                     <li ng-class="{active: selectedMenu=='employee'}">
                         <a ui-sref="dashboard.employee" ng-click="selectedMenu='employee'">Mantenimiento de Empleado</a>
-                    </li>                     
+                    </li>
+                    <li ng-class="{active: selectedMenu=='item'}">
+                        <a ui-sref="dashboard.item" ng-click="selectedMenu='item'">Mantenimiento de Item</a>
+                    </li>  
+                    <li ng-class="{active: selectedMenu=='account'}">
+                        <a ui-sref="dashboard.account" ng-click="selectedMenu='account'">Mantenimiento de Cuenta</a>
+                    </li>
+                    <li ng-class="{active: selectedMenu=='invoice'}">
+                        <a ui-sref="dashboard.invoice" ng-click="selectedMenu='invoice'">Facturacion</a>
+                    </li>                         
                     <li>
                         <a ui-sref="login">Login Page</a>
                     </li>
