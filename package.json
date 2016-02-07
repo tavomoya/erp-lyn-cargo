@@ -1,9 +1,8 @@
 {
-  "name": "sb-admin",
+  "name": "Erp Lyn Cargo",
   "version": "0.0.0",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/start-angular/sb-admin-angular"
+    "type": "git"
   },
   "dependencies": {},
   "devDependencies": {

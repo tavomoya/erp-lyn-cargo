@@ -5,106 +5,56 @@
             <li ui-sref-active="active">
                 <a ui-sref="dashboard.home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
-            <li ui-sref-active="active">
-
-                <a ui-sref="dashboard.chart"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span></span></a>
-
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.table"><i class="fa fa-table fa-fw"></i> Tables</a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.form"><i class="fa fa-edit fa-fw"></i> Forms</a>
-            </li>
-            <li ng-class="{active: collapseVar==1}">{{dropDown}}
-                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> UI Elements<span
+            <!--Entidades-->
+            <li ng-class="{active: collapseVar==1}">
+                <a href="" ng-click="check(1)"><i class="fa fa-user fa-fw"></i> Entidades <span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=1">
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.panels-wells">Panels and Wells</a>
+                    <li ng-class="{active: selectedMenu=='client'}">
+                        <a ui-sref="dashboard.client" ng-click="selectedMenu='client'">Cliente</a>
                     </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.buttons">Buttons</a>
+                    <li ng-class="{active: selectedMenu=='vendor'}">
+                        <a ui-sref="dashboard.vendor" ng-click="selectedMenu='vendor'">Proveedor</a>
                     </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.notifications">Notifications</a>
+                    <li ng-class="{active: selectedMenu=='agent'}">
+                        <a ui-sref="dashboard.agent" ng-click="selectedMenu='agent'">Agente</a>
                     </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.typography">Typography</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.icons"> Icons</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">Grid</a>
+                    <li ng-class="{active: selectedMenu=='employee'}">
+                        <a ui-sref="dashboard.employee" ng-click="selectedMenu='employee'">Empleado</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+            <!-- Contabilidad -->
             <li ng-class="{active: collapseVar==2}">
-                <a href="" ng-click="check(2)"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span
+                <a href="" ng-click="check(2)"><i class="fa fa-money fa-fw"></i> Contabilidad <span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
-                    <li>
-                        <a href="">Second Level Item</a>
+                    <li ng-class="{active: selectedMenu=='item'}">
+                        <a ui-sref="dashboard.item" ng-click="selectedMenu='item'">Items</a>
+                    </li>  
+                    <li ng-class="{active: selectedMenu=='account'}">
+                        <a ui-sref="dashboard.account" ng-click="selectedMenu='account'">Cuentas Contables</a>
                     </li>
-                    <li>
-                        <a href="">Second Level Item</a>
+                    <li ng-class="{active: selectedMenu=='invoice'}">
+                        <a ui-sref="dashboard.invoice" ng-click="selectedMenu='invoice'">Facturacion de Clientes</a>
                     </li>
-                    <li ng-init="third=!third" ng-class="{active: multiCollapseVar==3}">
-                        <a href="" ng-click="multiCheck(3)">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=3">
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-
-                        </ul>
-                        <!-- /.nav-third-level -->
-                    </li>
+                    <li ng-class="{active: selectedMenu=='bill'}">
+                        <a ui-sref="dashboard.bill" ng-click="selectedMenu='bill'">Facturacion de Proveedores</a>
+                    </li> 
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
             <li ng-class="{active:collapseVar==4}">
                 <a href="" ng-click="check(4)"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=4">
-                    <li ng-class="{active: selectedMenu=='client'}">
-                        <a ui-sref="dashboard.client" ng-click="selectedMenu='client'">Mantenimiento de Cliente</a>
-                    </li>
-                    <li ng-class="{active: selectedMenu=='vendor'}">
-                        <a ui-sref="dashboard.vendor" ng-click="selectedMenu='vendor'">Mantenimiento de Proveedor</a>
-                    </li>
-                    <li ng-class="{active: selectedMenu=='agent'}">
-                        <a ui-sref="dashboard.agent" ng-click="selectedMenu='agent'">Mantenimiento de Agente</a>
-                    </li>
-                    <li ng-class="{active: selectedMenu=='employee'}">
-                        <a ui-sref="dashboard.employee" ng-click="selectedMenu='employee'">Mantenimiento de Empleado</a>
-                    </li>
-                    <li ng-class="{active: selectedMenu=='item'}">
-                        <a ui-sref="dashboard.item" ng-click="selectedMenu='item'">Mantenimiento de Item</a>
-                    </li>  
-                    <li ng-class="{active: selectedMenu=='account'}">
-                        <a ui-sref="dashboard.account" ng-click="selectedMenu='account'">Mantenimiento de Cuenta</a>
-                    </li>
-                    <li ng-class="{active: selectedMenu=='invoice'}">
-                        <a ui-sref="dashboard.invoice" ng-click="selectedMenu='invoice'">Facturacion</a>
-                    </li>                         
+                <ul class="nav nav-second-level" collapse="collapseVar!=4">       
                     <li>
                         <a ui-sref="login">Login Page</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li><a href="http://www.strapui.com/">Premium Angular Themes</a></li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

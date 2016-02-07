@@ -158,18 +158,6 @@ angular
     .state('dashboard.item',{
         templateUrl:'views/pages/item.html',
         url:'/item'
-        // controller: 'EmployeeCtrl',
-        // resolve: {
-        //   loadMyFiles:function($ocLazyLoad) {
-        //     return $ocLazyLoad.load({
-        //       name:'erpLynCargoApp',
-        //       files:[
-        //       'scripts/directives/entity/entity.js',
-        //       'scripts/controllers/employee.js'
-        //       ]
-        //     })
-        //   }
-        // }
     })
     .state('dashboard.account',{
         templateUrl:'views/pages/account.html',
@@ -178,6 +166,10 @@ angular
     .state('dashboard.invoice',{
         templateUrl:'views/pages/invoice.html',
         url:'/invoice'
+    })
+    .state('dashboard.bill',{
+        templateUrl:'views/pages/bill.html',
+        url:'/bill'
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
