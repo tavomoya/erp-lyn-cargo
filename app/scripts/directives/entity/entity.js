@@ -10,15 +10,11 @@ angular.module('erpLynCargoApp')
 				type: '='	
 			},
 			controller: function ($scope) {
-				
-				console.log('las cosas', $scope.type, $scope.ngModel);
 				$scope.entity = {};
 				$scope.entityTypes = ['Persona', 'Empresa'];
 				$scope.documentTypes = ['Cedula', 'Pasaporte'];
 				$scope.entity.type = 'Persona';
-				$scope.ngModel = $scope.entity;
-				console.log('las cosas', $scope.type, $scope.ngModel);
-				
+				$scope.ngModel = $scope.entity;				
 			}
 		}
 	});

@@ -1,0 +1,135 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Expediente</h1>
+		</div>
+	</div>
+	
+	<div class="row">
+		<!-- Tabs -->
+		<ul class="nav nav-tabs">
+			<li ng-class="{'active': activeTab == 1}"><a ng-click="activeTab = 1" data-toggle="tab">Datos del Expediente</a>
+			</li>
+			<li ng-class="{'active': activeTab == 2}"><a ng-click="activeTab = 2" data-toggle="tab">Descripci&oacute;n de la carga</a>
+			</li>
+			<li ng-class="{'active': activeTab == 3}"><a ng-click="activeTab = 3" data-toggle="tab">Contenedores</a>
+			</li>
+			<li ng-class="{'active': activeTab == 4}"><a ng-click="activeTab = 4" data-toggle="tab">Courier</a>
+			</li>
+		</ul>
+		
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div ng-if="activeTab == 1">
+					<br>
+					<form class="form-horizontal" role="form" name="shipmentForm">
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Cotizaci&oacute;n</label>
+							<div class="col-xs-4">
+								<select class="form-control" name="quotation" id="quotation" ng-model="shipment.quotation" required>
+								</select>	
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Cliente:</label>
+							<div class="col-xs-4">
+								<select class="form-control" name="client" id="client" ng-model="shipment.client" required>
+								</select>	
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Nombre del Expediente:</label>
+							<div class="col-xs-4">
+								<input type="text" class="form-control" name="name" id="name" ng-model="shipment.name" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Fecha de Inicio/Fecha de Fin:</label>
+							<div class="col-xs-2">
+								<input type="date" class="form-control" name="startDate" id="startDate" ng-model="shipment.startDate" required>
+							</div>
+							<div class="col-xs-2">
+								<input type="date" class="form-control" name="endDate" id="endDate" ng-model="shipment.endDate" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Moneda:</label>
+							<div class="col-xs-4">
+								<select class="form-control" name="currency" id="currency" ng-model="shipment.currency" required>
+								</select>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div ng-if="activeTab == 2">
+				<!-- Soy yo mismo xD (Gregory) -->
+				<span>Aqui habran cosas que Luis pondra porque Gregory no sabe :P</span> 
+				</div>
+				<div ng-if="activeTab == 3">
+					<!-- Soy yo mismo xD (Gregory) -->
+					<span>Aqui habran cosas que Luis pondra porque Gregory no sabe :P</span> 
+				</div>
+				<div ng-if="activeTab == 4">
+					<br>
+					<form class="form-horizontal" role="form" name="">
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Agente:</label>
+							<div class="col-xs-4">
+								<select class="form-control" name="agent" id="agent" ng-model="shipment.agent">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Mercado:</label>
+							<div class="col-xs-4">
+								<select class="form-control" name="market" id="market" ng-model="shipment.market">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Puerto de Embarque:</label>
+							<div class="col-xs-4">
+								<select class="form-control" name="loadingPort" id="loadingPort" ng-model="shipment.loadingPort">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Puerto de Desembarque:</label>
+							<div class="col-xs-4">
+								<select class="form-control" name="dischargePort" id="dischargePort" ng-model="shipment.dischargePort">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Embarcaci&oacute;n:</label>
+							<div class="col-xs-4">
+								<input type="text" class="form-control" name="shipName" id="shipName" ng-model="shipment.shipName">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Viaje:</label>
+							<div class="col-xs-4">
+								<input type="text" class="form-control" name="trip" id="trip" ng-model="shipment.trip">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Shipper:</label>
+							<div class="col-xs-4">
+								<input type="text" class="form-control" name="shipper" id="shipper" ng-model="shipment.shipper">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Fecha Estimada de Salida/Llegada:</label>
+							<div class="col-xs-2">
+								<input type="date" class="form-control" name="departureDate" id="departureDate" ng-model="shipment.departureDate" required>
+							</div>
+							<div class="col-xs-2">
+								<input type="date" class="form-control" name="landingDate" id="landingDate" ng-model="shipment.landingDate" required>
+							</div>
+						</div>
+					</form>
+				</div>	
+			</div>	
+		</div>
+	</div>
+</div>

@@ -45,12 +45,24 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+            <!-- Operaciones -->
+            <li ng-class="{active:collapseVar==3}">
+                <a href="" ng-click="check(3)"><i class="fa fa-files-o fa-fw"></i> Operaciones <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=3">       
+                    <li>
+                        <a ui-sref="dashboard.shipment" ng-click="selectedMenu='shipment'">Expediente</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <!-- Recursos Humanos -->
             <li ng-class="{active:collapseVar==4}">
-                <a href="" ng-click="check(4)"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span
+                <a href="" ng-click="check(4)"><i class="fa fa-group fa-fw"></i> Recursos Humanos <span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=4">       
                     <li>
-                        <a ui-sref="login">Login Page</a>
+                        <a ui-sref="dashboard.payroll" ng-click="selectedMenu='payroll'">N&oacute;mina</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

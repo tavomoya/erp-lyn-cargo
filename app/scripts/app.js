@@ -171,6 +171,23 @@ angular
         templateUrl:'views/pages/bill.html',
         url:'/bill'
     })
+    .state('dashboard.payroll',{
+        templateUrl:'views/pages/payroll.html',
+        url:'/payroll'
+    })
+    .state('dashboard.shipment',{
+        templateUrl:'views/pages/shipment.html',
+        url:'/shipment',
+        controller: 'ShipmentCtrl',
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'erpLynCargoApp',
+              files: ['scripts/controllers/shipment.js']
+            })
+          }
+        }
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
