@@ -42,6 +42,12 @@
                     <li ng-class="{active: selectedMenu=='bill'}">
                         <a ui-sref="dashboard.bill" ng-click="selectedMenu='bill'">Facturacion de Proveedores</a>
                     </li> 
+                    <li ng-class="{active: selectedMenu=='client_statement'">
+                        <a ui-sref="dashboard.client_statement" ng-click="selectedMenu='client_statement'">Estado de Cuenta - Clientes</a>
+                    </li>
+                    <li ng-class="{active: selectedMenu=='provider_statement'">
+                        <a ui-sref="dashboard.provider_statement" ng-click="selectedMenu='provider_statement'">Estado de Cuenta - Proveedores</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

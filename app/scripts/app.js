@@ -175,6 +175,14 @@ angular
         templateUrl:'views/pages/payroll.html',
         url:'/payroll'
     })
+    .state('dashboard.client_statement',{
+        templateUrl:'views/pages/client_statement.html',
+        url:'/client_statement'
+    })
+    .state('dashboard.provider_statement',{
+        templateUrl:'views/pages/provider_statement.html',
+        url:'/provider_statement'
+    })
     .state('dashboard.shipment',{
         templateUrl:'views/pages/shipment.html',
         url:'/shipment',
