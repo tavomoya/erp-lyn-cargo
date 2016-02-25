@@ -175,6 +175,14 @@ angular
         templateUrl:'views/pages/payroll.html',
         url:'/payroll'
     })
+    .state('dashboard.client_statement',{
+        templateUrl:'views/pages/client_statement.html',
+        url:'/client_statement'
+    })
+    .state('dashboard.provider_statement',{
+        templateUrl:'views/pages/provider_statement.html',
+        url:'/provider_statement'
+    })
     .state('dashboard.shipment',{
         templateUrl:'views/pages/shipment.html',
         url:'/shipment',
@@ -184,6 +192,19 @@ angular
             return $ocLazyLoad.load({
               name: 'erpLynCargoApp',
               files: ['scripts/controllers/shipment.js']
+            })
+          }
+        }
+    })
+    .state('dashboard.quote',{
+        templateUrl:'views/pages/quote.html',
+        url:'/quote',
+        controller: 'QuoteCtrl',
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'erpLynCargoApp',
+              files: ['scripts/controllers/quote.js']
             })
           }
         }
