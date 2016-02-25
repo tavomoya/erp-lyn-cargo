@@ -59,6 +59,9 @@
                     <li>
                         <a ui-sref="dashboard.shipment" ng-click="selectedMenu='shipment'">Expediente</a>
                     </li>
+                    <li ng-class="{active: selectedMenu=='quote'">
+                        <a ui-sref="dashboard.quote" ng-click="selectedMenu='quote'">Cotizaci&oacute;n</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

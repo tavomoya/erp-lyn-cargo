@@ -196,6 +196,19 @@ angular
           }
         }
     })
+    .state('dashboard.quote',{
+        templateUrl:'views/pages/quote.html',
+        url:'/quote',
+        controller: 'QuoteCtrl',
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'erpLynCargoApp',
+              files: ['scripts/controllers/quote.js']
+            })
+          }
+        }
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
