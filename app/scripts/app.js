@@ -183,6 +183,10 @@ angular
         templateUrl:'views/pages/provider_statement.html',
         url:'/provider_statement'
     })
+    .state('dashboard.accountMovements',{
+        templateUrl:'views/pages/accountMovements.html',
+        url:'/accountMovements'
+    })
     .state('dashboard.shipment',{
         templateUrl:'views/pages/shipment.html',
         url:'/shipment',

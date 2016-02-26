@@ -42,11 +42,14 @@
                     <li ng-class="{active: selectedMenu=='bill'}">
                         <a ui-sref="dashboard.bill" ng-click="selectedMenu='bill'">Facturacion de Proveedores</a>
                     </li> 
-                    <li ng-class="{active: selectedMenu=='client_statement'">
+                    <li ng-class="{active: selectedMenu=='client_statement'}">
                         <a ui-sref="dashboard.client_statement" ng-click="selectedMenu='client_statement'">Estado de Cuenta - Clientes</a>
                     </li>
-                    <li ng-class="{active: selectedMenu=='provider_statement'">
+                    <li ng-class="{active: selectedMenu=='provider_statement'}">
                         <a ui-sref="dashboard.provider_statement" ng-click="selectedMenu='provider_statement'">Estado de Cuenta - Proveedores</a>
+                    </li>
+                    <li ng-class="{active: selectedMenu=='accountMovements'}">
+                        <a ui-sref="dashboard.accountMovements" ng-click="selectedMenu='accountMovements'">Movimiento de Cuentas</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -59,7 +62,7 @@
                     <li>
                         <a ui-sref="dashboard.shipment" ng-click="selectedMenu='shipment'">Expediente</a>
                     </li>
-                    <li ng-class="{active: selectedMenu=='quote'">
+                    <li ng-class="{active: selectedMenu=='quote'}">
                         <a ui-sref="dashboard.quote" ng-click="selectedMenu='quote'">Cotizaci&oacute;n</a>
                     </li>
                 </ul>
