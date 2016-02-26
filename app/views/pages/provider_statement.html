@@ -6,28 +6,30 @@
 	</div>
 
 	<div class="row">
-		<div class="col-lg-4">
-			<div class="form-group">
-				<label class="control-label">Cliente:</label>
-				<select class="form-control" name="client" id="client" ng-model="client">
-					<option>Aqui estara el listado de proveedores</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-				<label class="col-xs-2 control-label">B&uacute;squeda:</label>
-				<div class="col-lg-8">
-					<input type="text" class="form-control" name="search" id="search" ng-model="search">
-				</div>				
-		</div>
-		<div class="col-lg-10">
-			<div class="form-group">
-				<label class="col-xs-4 control-label">Fecha de Inicio/Fecha de Fin:</label>
-				<div class="col-xs-2">
-					<input type="date" class="form-control" name="startDate" id="startDate" ng-model="shipment.startDate" required>
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="form-group">
+					<label class="control-label">Proveedor:</label>
+					<select class="form-control" name="proveedor" id="proveedor" ng-model="proveedor">
+						<option>Aqui estara el listado de proveedores</option>
+					</select>
 				</div>
-				<div class="col-xs-2">
-					<input type="date" class="form-control" name="endDate" id="endDate" ng-model="shipment.endDate" required>
+			</div>
+			<div class="col-lg-4">
+				<div class="form-group">
+					<label class="col-xs-4 control-label">Fecha de Inicio/Fecha de Fin:</label>
+					<div class="col-xs-4">
+						<input type="date" class="form-control" name="startDate" id="startDate" ng-model="startDate" required>
+					</div>
+					<div class="col-xs-4">
+						<input type="date" class="form-control" name="endDate" id="endDate" ng-model="endDate" required>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="form-group">
+					<label class="control-label">B&uacute;squeda:</label>
+					<input type="text" class="form-control" name="search" id="search" ng-model="search">
 				</div>
 			</div>
 		</div>
