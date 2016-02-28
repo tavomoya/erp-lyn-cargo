@@ -15,12 +15,12 @@ app.factory('Data', function ($http, $q, $rootScope) {
 	};
 
 	// Helper
-	var getData = function (object) {
+	Data.prototype.getData = function (object) {
 		if (object === null || object === undefined) {
 			object = this;
 		};
 
-		return JSON.parse(JSON.stringify(object));
+		return object;
 	};
 
 	/*
@@ -41,7 +41,6 @@ app.factory('Data', function ($http, $q, $rootScope) {
 		$http.post(this.apiPath + '/find', params)
 		.then(function (res) {
 			var _res;
-			console.log('hola :) ', res);
 			if (Array.isArray(res)) {
 				_res = res.map(function (obj) {
 					return new _this(obj);
@@ -107,7 +106,7 @@ app.factory('Data', function ($http, $q, $rootScope) {
 		if (!object) {
 			object = _this.getData();
 		}
-
+		console.log('que estoy haciendo mal?', object);
 		if (!_this._id) {
 			$http.post(_this.apiPath, {obj: object})
 			.then(function (res) {
