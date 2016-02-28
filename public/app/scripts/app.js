@@ -15,7 +15,7 @@ angular
     'angular-loading-bar',
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
-    
+
     $ocLazyLoadProvider.config({
       debug:false,
       events:true,
@@ -157,7 +157,19 @@ angular
     })
     .state('dashboard.item',{
         templateUrl:'views/pages/item.html',
-        url:'/item'
+        url:'/item',
+        controller: 'ItemCtrl',
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'erpLynCargoApp',
+              files: ['scripts/controllers/item.js']
+            });
+          },
+          itemTypes: function (ItemType) {
+            return new ItemType().find();
+          }
+        }
     })
     .state('dashboard.account',{
         templateUrl:'views/pages/account.html',
@@ -266,5 +278,3 @@ angular
        url:'/grid'
    })
   }]);
-
-    

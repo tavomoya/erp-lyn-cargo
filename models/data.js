@@ -64,8 +64,8 @@ Data.prototype.findById = function(id) {
 		_id: id
 	};
 
-	this.collection.findOne(query, {}, 
-		handleResponse(deferred));	
+	this.collection.findOne(query, {},
+		handleResponse(deferred));
 
 	return deferred.promise;
 };
@@ -73,10 +73,10 @@ Data.prototype.findById = function(id) {
 Data.prototype.insert = function (object) {
 	var deferred = q.defer();
 	var _this = this;
-	object.createdDate = new Date();
+	// object.createdDate = new Date();
 
 	if (validateSchema(deferred, object, _this.schema)) {
-		_this.collection.insert(object, 
+		_this.collection.insert(object,
 			handleResponse(deferred))
 	};
 
@@ -87,7 +87,7 @@ Data.prototype.update = function(query, updObject, options) {
 	var deferred = q.defer();
 	var _options = (!options) ? {} : options;
 
-	this.collection.update(query, updObject, _options, 
+	this.collection.update(query, updObject, _options,
 		handleResponse(deferred));
 
 	return deferred.promise;
@@ -96,7 +96,7 @@ Data.prototype.update = function(query, updObject, options) {
 Data.prototype.delete = function(query) {
 	var deferred = q.defer();
 
-	this.collection.deleteOne(query, 
+	this.collection.deleteOne(query,
 		handleResponse(deferred));
 
 	return deferred.promise;
@@ -106,7 +106,7 @@ Data.prototype.count = function(query, options) {
 	var deferred = q.defer();
 	var _options = (!options) ? {} : options;
 
-	this.collection.count(query, _options, 
+	this.collection.count(query, _options,
 		handleResponse(deferred));
 
 	return deferred.promise;

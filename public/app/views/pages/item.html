@@ -1,15 +1,21 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-lg-10">
 			<h1 class="page-header">Item</h1>
 		</div>
+		<br>
+		<br>
+		<div class="col-lg-2 pull-right">
+			<button class="btn btn-default" ng-click="goBack()">Regresar</button>
+			<button class="btn btn-primary" ng-click="saveItem()">Guardar</button>
+		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="panel panel-default">
 			<div class="panel panel-heading">
 				Informaci&oacute;n del Item
-			</div>	
+			</div>
 			<div class="panel panel-body">
 				<form class="form-horizontal" role="form" name="itemForm">
 					<div class="form-group">
@@ -27,17 +33,16 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label" for="type">Tipo de Item:</label>
 						<div class="col-xs-3">
-							<select class="form-control" name="type" id="type" ng-model="item.type" required>
-								<option>Un tipo de Item</option>
+							<select class="form-control" name="type" id="type" ng-model="item.itemType" ng-options="i.description for i in itemTypes track by i._id" required>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-1 control-label" for="price">Precio:</label>
 						<div class="col-xs-3">
-							<input type="text" class="form-control" name="price" id="price" ng-model="item.price" required>
+							<input type="number" class="form-control" name="price" id="price" ng-model="item.price" required>
 						</div>
-					</div>					
+					</div>
 				</form>
 				<div class="col-lg-6">
 					<div class="table-reponsive">
@@ -62,7 +67,7 @@
 						<button class="btn btn-default">Agregar <i class="fa fa-plus"></i></button>
 					</div>
 				</div>
-			</div>	
-		</div>	
+			</div>
+		</div>
 	</div>
-</div>	
+</div>
