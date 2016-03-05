@@ -45,6 +45,26 @@ function validateSchema (deferred, object, schema) {
 	return false;
 };
 
+function dateParser (object) {
+	for (var key in object) {
+		if (/date/.test(key.toLowerCase)) {
+			if (typeof object[key] !== 'object') {
+				object[key] = new Date(object[key]);
+			} else {
+				for(var innerKey in object[key]) {
+					if (/$/.test(key2.toLowerCase())) {
+						object[key][innerKey] = new Date(object[key][innerKey]);
+					}
+				}
+			}
+		} else if (Array.isArray(object[key])) {
+			for (var o in object[key]){
+				object[key][o] = dateParser(object[key][o]);
+			}
+		}
+	}
+	return object;
+};
 
 // Public functions
 

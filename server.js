@@ -12,7 +12,7 @@ d.on('error', function (er) {
 	console.error(er);
 	console.error(er.message);
 	console.error(er.stack);
-	
+
 	var error = {
 		date: new Date(),
 		message: er.message,
@@ -87,7 +87,7 @@ d.run(function () {
 		app.use(app.router);
 		app.use(express.responseTime());
 		app.use(express.compress());
-		app.use(express.favicon(__dirname + '/' + config.PUBLIC_PATH + '/img/favicon.ico'));
+		app.use(express.favicon(__dirname + '/' + config.PUBLIC_PATH + '/favicon.ico'));
 		app.use('/', express.static(path.join(__dirname, config.PUBLIC_PATH)));
 		app.use('/images', express.static(path.join(__dirname, 'images')));
 		app.use('/bower_components', express.static(path.join(__dirname, 'public/bower_components')));
@@ -111,10 +111,12 @@ d.run(function () {
 	require('./routes/entity')('/entity', app);
 	require('./routes/item')('/item', app);
 	require('./routes/itemType')('/itemType', app);
-    require('./routes/payroll')('/payroll', app);
-    require('./routes/quotation')('/quotation', app);
-    require('./routes/shipment')('/shipment', app);
-    require('./routes/shipmentType')('/shipmentType', app);
+  require('./routes/payroll')('/payroll', app);
+  require('./routes/quotation')('/quotation', app);
+  require('./routes/shipment')('/shipment', app);
+  require('./routes/shipmentType')('/shipmentType', app);
+  require('./routes/util')('/util', app);
+
 
 
 	// Routes Principales
@@ -124,7 +126,7 @@ d.run(function () {
 	// app.db = db;
 
 	/*
-		Need to get the MongoDB instance before 
+		Need to get the MongoDB instance before
 		starting the API so I don't get any errors
 		while executing methods in the models
 		and/or routes. Start Server after this
@@ -134,7 +136,7 @@ d.run(function () {
 		var job = new Job(app.db)
 		job.dollarsToPesos();
 		job.euroToPesos();
-		
+
 		http.createServer(app).listen(config.APP_PORT, function () {
 			console.log("\n[*] Server Listening on port %d", config.APP_PORT);
 		});

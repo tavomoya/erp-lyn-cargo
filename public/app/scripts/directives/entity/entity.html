@@ -1,122 +1,139 @@
-<form class="form-horizontal" role="form" name="entityForm">
-	<div class="form-group" ng-if="type != 'Agente' && type != 'Empleado'">
-		<label class="col-xs-2 control-label">Tipo de {{type}}:</label>
-		<div class="col-xs-4">
-			<select class="form-control" name="type" ng-model="entity.type" ng-options="t for t in entityTypes">
-			</select>
+<form class="form-horizontal" role="form" name="entityForm" id="entityForm" ng-submit="saveEntity()" novalidate>
+	<fieldset ng-disabled="saved">
+		<div class="form-group" ng-if="type != 'Agente' && type != 'Empleado'">
+			<label class="col-xs-2 control-label">Tipo de {{type}}:</label>
+			<div class="col-xs-4">
+				<select class="form-control" name="type" ng-model="entity.type" ng-options="t for t in entityTypes">
+				</select>
+			</div>
 		</div>
-	</div>
-	<hr ng-if="type != 'Agente' && type != 'Empleado'">
-	<div class="form-group" ng-if="entity.type == 'Empresa'">
-		<label class="col-xs-2 control-label">Nombre:</label>
-		<div class="col-xs-4">
-			<input type="text" class="form-control" name="companyName" id="companyName" ng-model="entity.companyName" placeholder="Ingrese el nombre de la empresa"
-			required>
+		<hr ng-if="type != 'Agente' && type != 'Empleado'">
+		<div class="form-group" ng-if="entity.type == 'Empresa'">
+			<label class="col-xs-2 control-label">Nombre:</label>
+			<div class="col-xs-4">
+				<input type="text" class="form-control" name="companyName" id="companyName" ng-model="entity.companyName" placeholder="Ingrese el nombre de la empresa"
+				required>
+			</div>
 		</div>
-	</div>
-	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
-		<label class="col-xs-2 control-label">Nombre:</label>
-		<div class="col-xs-4">
-			<input type="text" class="form-control" name="firstName" id="firstName" ng-model="entity.firstName" placeholder="Ingrese el nombre"
-			required>
+		<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
+			<label class="col-xs-2 control-label">Nombre:</label>
+			<div class="col-xs-4">
+				<input type="text" class="form-control" name="firstName" id="firstName" ng-model="entity.firstName" placeholder="Ingrese el nombre"
+				required>
+			</div>
 		</div>
-	</div>
-	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
-		<label class="col-xs-2 control-label">Apellido:</label>
-		<div class="col-xs-4">
-			<input type="text" class="form-control" name="lastName" id="lastName" ng-model="entity.lastName" placeholder="Ingrese el apellido"
-			required>
+		<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
+			<label class="col-xs-2 control-label">Apellido:</label>
+			<div class="col-xs-4">
+				<input type="text" class="form-control" name="lastName" id="lastName" ng-model="entity.lastName" placeholder="Ingrese el apellido"
+				required>
+			</div>
 		</div>
-	</div>
-	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
-		<label class="col-xs-2 control-label">Fecha de Nacimiento:</label>
-		<div class="col-xs-2">
-			<input type="date" class="form-control" name="birthDate" id="birthDate" ng-model="entity.birthDate" required>
+		<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
+			<label class="col-xs-2 control-label">Fecha de Nacimiento:</label>
+			<div class="col-xs-2">
+				<input type="date" class="form-control" name="birthDate" id="birthDate" ng-model="entity.birthDate" required>
+			</div>
 		</div>
-	</div>
-	<hr>
-	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
-		<label class="col-xs-2 control-label">Tipo de Documento:</label>
-		<div class="col-xs-4">
-			<select class="form-control" name="documentType" ng-model="entity.documentType" ng-options="dt for dt in documentTypes"></select>
+		<hr>
+		<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
+			<label class="col-xs-2 control-label">Tipo de Documento:</label>
+			<div class="col-xs-4">
+				<select class="form-control" name="documentType" ng-model="entity.documentType" ng-options="dt for dt in documentTypes"></select>
+			</div>
 		</div>
-	</div>
-	<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
-		<label class="col-xs-2 control-label">Documento de Identidad:</label>
-		<div class="col-xs-4">
-			<input type="text" class="form-control" name="documentNumber" id="documentNumber" ng-model="entity.documentNumber" required>
+		<div class="form-group" ng-if="entity.type == 'Persona' || type == 'Empleado'">
+			<label class="col-xs-2 control-label">Documento de Identidad:</label>
+			<div class="col-xs-4">
+				<input type="text" class="form-control" name="documentNumber" id="documentNumber" ng-model="entity.documentNumber" required>
+			</div>
 		</div>
-	</div>
-	<div class="form-group" ng-if="entity.type == 'Empresa'">
-		<label class="col-xs-2 control-label">No. RNC:</label>
-		<div class="col-xs-4">
-			<input type="text" class="form-control" name="companyRnc" id="companyRnc" ng-model="entity.companyRnc" required>
+		<div class="form-group" ng-if="entity.type == 'Empresa'">
+			<label class="col-xs-2 control-label">No. RNC:</label>
+			<div class="col-xs-4">
+				<input type="text" class="form-control" name="rnc" id="rnc" ng-model="entity.rnc" required>
+			</div>
 		</div>
-	</div>
-	<hr>
-	<div class="form-group" ng-if="entity.type == 'Empresa'">
-		<label class="col-xs-2 control-label">Contacto:</label>
-		<div class="col-xs-4">
-			<input type="text" class="form-control" name="contact" id="contact" ng-model="entity.contact" required>
+		<hr>
+		<div class="form-group" ng-if="entity.type == 'Empresa'">
+			<label class="col-xs-2 control-label">Contacto:</label>
+			<div class="col-xs-4">
+				<input type="text" class="form-control" name="contact" id="contact" ng-model="entity.contact" required>
+			</div>
 		</div>
-	</div>
-	<div class="form-group" ng-if="entity.type == 'Empresa'">
-		<label class="col-xs-2 control-label">Tel&eacute;fono de Contacto:</label>
-		<div class="col-xs-4">
-			<input type="tel" class="form-control" name="contactPhone" id="contactPhone" ng-model="entity.contactPhone" required>
+		<div class="form-group" ng-if="entity.type == 'Empresa'">
+			<label class="col-xs-2 control-label">Tel&eacute;fono de Contacto:</label>
+			<div class="col-xs-4">
+				<input type="tel" class="form-control" name="contactPhone" id="contactPhone" ng-model="entity.contactPhone" required>
+			</div>
 		</div>
-	</div>
-	<hr ng-if="entity.type == 'Empresa'">		
-	<div class="form-group">
-		<label class="col-xs-2 control-label">Direcci&oacute;n:</label>
-		<div class="col-xs-4">
-			<textarea class="form-control" name="address" ng-model="entity.address"></textarea>
+		<hr ng-if="entity.type == 'Empresa'">
+		<div class="form-group">
+			<label class="col-xs-2 control-label">Pa&iacute;s:</label>
+			<div class="col-xs-4">
+				<select class="form-control" name="country" ng-model="entity.address.country" ng-options="c.name.common for c in countries track by c._id"></select>
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-xs-2 control-label">Tel&eacute;fono:</label>
-		<div class="col-xs-4">
-			<input type="tel" class="form-control" name="phone" id="phone" ng-model="entity.phone" required>
+		<div class="form-group">
+			<label class="col-xs-2 control-label">Provincia:</label>
+			<div class="col-xs-4">
+				<select class="form-control" name="province" ng-model="entity.address.province" ng-options="p.nombre for p in provincias track by p._id"></select>
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		<label class="col-xs-2 control-label">Correo Electr&oacute;nico:</label>
-		<div class="col-xs-4">
-			<input type="email" class="form-control" name="email" id="email" ng-model="entity.email" required>
+		<div class="form-group">
+			<label class="col-xs-2 control-label">Sector:</label>
+			<div class="col-xs-4">
+				<select class="form-control" name="sector" ng-model="entity.address.sector" ng-options="s.nombre for s in sectores track by s._id"></select>
+			</div>
 		</div>
-	</div>
-	<hr>
-	<!-- En caso de que sea cliente o proveedor -->
-	<div class="form-group" ng-if="type != 'Agente' && type != 'Empleado'">
-		<label class="col-xs-2 control-label">Moneda:</label>
-		<div class="col-xs-4">
-			<select class="form-control" name="currency" ng-model="entity.currency">
-				<option>DOP - Dominican Peso</option>
-				<option>USD - United States Dollar</option>
-				<option>EUR - Euro</option>
-			</select>
+		<div class="form-group">
+			<label class="col-xs-2 control-label">Direcci&oacute;n:</label>
+			<div class="col-xs-4">
+				<textarea class="form-control" name="address" ng-model="entity.address.description"></textarea>
+			</div>
 		</div>
-	</div>	
-	<div class="form-group" ng-if="type != 'Agente' && type != 'Empleado'">
-		<label class="col-xs-2 control-label">M&eacute;todo de Pago:</label>
-		<div class="col-xs-4">
-			<select class="form-control" name="paymentMethod" ng-model="entity.paymentMethod">
-				<option>Cheque</option>
-				<option>Efectivo</option>
-				<option>Tarjeta de Cr&eacute;dito</option>
-			</select>
+		<div class="form-group">
+			<label class="col-xs-2 control-label">Tel&eacute;fono:</label>
+			<div class="col-xs-4">
+				<input type="tel" class="form-control" name="phone" id="phone" ng-model="entity.phone" required>
+			</div>
 		</div>
-	</div>
-	<!-- En caso de que sea un agente -->
-	<div class="form-group" ng-if="type == 'Agente'">
-		<label class="col-xs-2 control-label">Mercado en el que opera:</label>
-		<div class="col-xs-4">
-			<select class="form-control" name="market" ng-model="entity.market">
-				<option>Am&eacute;rica del Norte</option>
-				<option>Am&eacute;rica del Sur</option>
-				<option>Am&eacute;rica Central</option>
-				<option>El Caribe</option>
-			</select>
+		<div class="form-group">
+			<label class="col-xs-2 control-label">Correo Electr&oacute;nico:</label>
+			<div class="col-xs-4">
+				<input type="email" class="form-control" name="email" id="email" ng-model="entity.email" required>
+			</div>
 		</div>
-	</div>	
+		<hr>
+		<!-- En caso de que sea cliente o proveedor -->
+		<div class="form-group" ng-if="type != 'Agente' && type != 'Empleado'">
+			<label class="col-xs-2 control-label">Moneda:</label>
+			<div class="col-xs-4">
+				<select class="form-control" name="currency" ng-model="entity.currency" ng-options="c.cc for c in currencies track by c._id">
+				</select>
+			</div>
+		</div>	
+		<div class="form-group" ng-if="type != 'Agente' && type != 'Empleado'">
+			<label class="col-xs-2 control-label">M&eacute;todo de Pago:</label>
+			<div class="col-xs-4">
+				<select class="form-control" name="paymentMethod" ng-model="entity.paymentMethod">
+					<option>Cheque</option>
+					<option>Efectivo</option>
+					<option>Tarjeta de Cr&eacute;dito</option>
+				</select>
+			</div>
+		</div>
+		<!-- En caso de que sea un agente -->
+		<div class="form-group" ng-if="type == 'Agente'">
+			<label class="col-xs-2 control-label">Mercado en el que opera:</label>
+			<div class="col-xs-4">
+				<select class="form-control" name="market" ng-model="entity.market">
+					<option>Am&eacute;rica del Norte</option>
+					<option>Am&eacute;rica del Sur</option>
+					<option>Am&eacute;rica Central</option>
+					<option>El Caribe</option>
+				</select>
+			</div>
+		</div>	
+	</fieldset>
 </form>

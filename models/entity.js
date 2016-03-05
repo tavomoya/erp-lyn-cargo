@@ -14,24 +14,28 @@ function Entity (db) {
         "properties": {
             "firstName": {
                 "type": "string",
-                "required": true
+                "required": false
             },
             "lastName": {
                 "type": "string",
-                "required": true
+                "required": false
+            },
+            "companyName": {
+                "type": "string",
+                "required": false
             },
             "identificationCode": {
                 "type": "number"
             },
             "rnc": {
-                "type": "number"
+                "type": "string"
             },
             "address": {
                 "type": "object",
                 "required": true
             },
             "phone": {
-                "type": "number",
+                "type": "string",
                 "required": true
             },
             "status": {
