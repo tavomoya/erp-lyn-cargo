@@ -87,7 +87,7 @@ d.run(function () {
 		app.use(app.router);
 		app.use(express.responseTime());
 		app.use(express.compress());
-		app.use(express.favicon(__dirname + '/' + config.PUBLIC_PATH + '/img/favicon.ico'));
+		app.use(express.favicon(__dirname + '/' + config.PUBLIC_PATH + '/favicon.ico'));
 		app.use('/', express.static(path.join(__dirname, config.PUBLIC_PATH)));
 		app.use('/images', express.static(path.join(__dirname, 'images')));
 		app.use('/bower_components', express.static(path.join(__dirname, 'public/bower_components')));
@@ -115,6 +115,7 @@ d.run(function () {
     require('./routes/quotation')('/quotation', app);
     require('./routes/shipment')('/shipment', app);
     require('./routes/shipmentType')('/shipmentType', app);
+    require('./routes/util')('/util',app);
 
 
 	// Routes Principales

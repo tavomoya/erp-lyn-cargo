@@ -3,7 +3,7 @@
 var app = angular.module('erpLynCargoApp');
 
 app.controller('ItemCtrl', function ($scope, $state, Item, itemTypes) {
-
+  
   $scope.item = new Item();
   $scope.itemTypes = itemTypes.data;
 

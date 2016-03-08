@@ -45,6 +45,27 @@ function validateSchema (deferred, object, schema) {
 	return false;
 };
 
+//Para formato de fechas
+function dateParser (object) {
+    for (var key in object) {
+        if (/date/.test(key.toLowerCase)) {
+            if (typeof object[key] !== 'object') {
+                object[key] = new Date(object[key]);
+            } else {
+                for(var innerKey in object[key]) {
+                    if (/$/.test(key2.toLowerCase())) {
+                        object[key][innerKey] = new Date(object[key][innerKey]);
+                    }
+                }
+            }
+        } else if (Array.isArray(object[key])) {
+            for (var o in object[key]){
+                object[key][o] = dateParser(object[key][o]);
+            }
+        }
+    }
+    return object;
+};
 
 // Public functions
 
@@ -71,10 +92,12 @@ Data.prototype.findById = function(id) {
 };
 
 Data.prototype.insert = function (object) {
+
 	var deferred = q.defer();
 	var _this = this;
 	// object.createdDate = new Date();
-
+	object = dateParser(object);
+	console.log("fecha", dateParser(object));
 	if (validateSchema(deferred, object, _this.schema)) {
 		_this.collection.insert(object,
 			handleResponse(deferred))
@@ -84,6 +107,7 @@ Data.prototype.insert = function (object) {
 };
 
 Data.prototype.update = function(query, updObject, options) {
+	updObject = dateParser(object);
 	var deferred = q.defer();
 	var _options = (!options) ? {} : options;
 

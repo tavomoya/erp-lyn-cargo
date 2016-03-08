@@ -3,6 +3,12 @@
 		<div class="col-lg-12">
 			<h1 class="page-header">Cuentas</h1>
 		</div>
+		<br>
+		<br>
+		<div class="col-lg-2 pull-right">
+			<button class="btn btn-default" ng-click="goBack()">Regresar</button>
+			<button class="btn btn-primary" ng-click="saveAccount()">Guardar</button>
+		</div>
 	</div>
 	
 	<div class="row">
@@ -13,17 +19,16 @@
 			<div class="panel panel-body">
 				<form class="form-horizontal" role="form" name="accountForm">
 					<div class="form-group">
-						<label class="col-xs-3 control-label" for="type">Tipo de Cuenta:</label>
+						<label class="col-xs-3 control-label" for="accountType">Tipo de Cuenta:</label>
 						<div class="col-xs-3">
-							<select class="form-control" name="type" id="type" ng-model="account.accountType" required>
-								<option>Tipos de cuenta</option>
+							<select class="form-control" name="accountType" id="accountType" ng-model="account.accountType" ng-options="i.description for i in accountTypes track by i._id"required>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-3 control-label" for="number">N&uacute;mero de Cuenta:</label>
+						<label class="col-xs-3 control-label" for="accountNumber">N&uacute;mero de Cuenta:</label>
 						<div class="col-xs-3">
-							<input type="text" class="form-control" name="number" id="number" ng-model="account.number" required>
+							<input type="number" class="form-control" name="accountNumber" id="accountNumber" ng-model="account.accountNumber" required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -35,16 +40,14 @@
 					<div class="form-group">
 						<label class="col-xs-3 control-label" for="superAccount">Cuenta Padre:</label>
 						<div class="col-xs-3">
-							<select class="form-control" name="superAccount" id="superAccount" ng-model="account.superAccount" required>
-								<option>Cuentas del tipo que se selecciono</option>
+							<select class="form-control" name="superAccount" id="superAccount" ng-model="account.superAccount" ng-options="i.name for i in superAccounts track by i._id"required>
 							</select>
 						</div>
 					</div>	
 					<div class="form-group">
 						<label class="col-xs-3 control-label" for="currency">Moneda:</label>
 						<div class="col-xs-3">
-							<select class="form-control" name="currency" id="currency" ng-model="account.currency" required>
-								<option>Se selecciona una moneda</option>
+							<select class="form-control" name="currency" id="currency" ng-model="account.currency" ng-options="i.name for i in currencies track by i._id" required>
 							</select>
 						</div>
 					</div>
@@ -52,15 +55,14 @@
 					<div class="form-group">
 						<label class="col-xs-3 control-label" for="bankAssociated">Banco:</label>
 						<div class="col-xs-3">
-							<select class="form-control" name="bankAssociated" id="bankAssociated" ng-model="account.bankAssociated" required>
-								<option>En caso de que el tipo de cuenta sea banco, se escoge uno</option>
+							<select class="form-control" name="bankAssociated" id="bankAssociated" ng-model="account.bankAssociated" ng-options="i.name for i in banks track by i._id" required>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 control-label" for="bankAccountNumber">N&uacute;mero de Cuenta en el Banco:</label>
 						<div class="col-xs-3">
-							<input type="text" class="form-control" name="bankAccountNumber" id="bankAccountNumber" ng-model="account.bankAccountNumber" required>
+							<input type="number" class="form-control" name="bankAccountNumber" id="bankAccountNumber" ng-model="account.bankAccountNumber" required>
 						</div>
 					</div>	
 				</form>
