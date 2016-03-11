@@ -173,15 +173,78 @@ angular
     })
     .state('dashboard.account',{
         templateUrl:'views/pages/account.html',
-        url:'/account'
+        url:'/account',
+        controller: 'AccountCtrl',
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'erpLynCargoApp',
+              files: ['scripts/controllers/account.js']
+            });
+          },
+          currencies: function (Util){
+            return new Util().getData('CURRENCY');
+          },
+          accountTypes: function(AccountType){
+            return new AccountType().find();
+          },
+          banks: function(Util){
+            return new Util().getData('BANK');
+          },
+          superAccounts: function(Account){
+            return new Account().find();
+          }
+        }
     })
     .state('dashboard.invoice',{
         templateUrl:'views/pages/invoice.html',
-        url:'/invoice'
+        url:'/invoice',
+        controller: 'InvoiceCtrl',
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'erpLynCargoApp',
+              files: ['scripts/controllers/invoice.js']
+            });          
+          },
+          clients : function(Entity){
+            return new Entity().find();
+          },
+          accounts: function(Account){
+            return new Account().find();
+          },
+          paymentMethods: function(Util){
+            return new Util().getData('PAYMENTMETHOD');
+          },
+          conditions: function(Util){
+            return new Util().getData('CONDITION');
+          }
+        }
     })
     .state('dashboard.bill',{
         templateUrl:'views/pages/bill.html',
-        url:'/bill'
+        url:'/bill',
+        controller: 'BillCtrl',
+        resolve: {
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'erpLynCargoApp',
+              files: ['scripts/controllers/bill.js']
+            });          
+          },
+          providers : function(Entity){
+            return new Entity().find();
+          },
+          accounts: function(Account){
+            return new Account().find();
+          },
+          paymentMethods: function(Util){
+            return new Util().getData('PAYMENTMETHOD');
+          },
+          conditions: function(Util){
+            return new Util().getData('CONDITION');
+          }
+        }
     })
     .state('dashboard.payroll',{
         templateUrl:'views/pages/payroll.html',

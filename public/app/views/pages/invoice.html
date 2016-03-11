@@ -3,6 +3,12 @@
 		<div class="col-lg-12">
 			<h1 class="page-header">Facturaci&oacute;n de Clientes</h1>
 		</div>
+		<br>
+		<br>
+		<div class="col-lg-2 pull-right">
+			<button class="btn btn-default" ng-click="goBack()">Regresar</button>
+			<button class="btn btn-primary" ng-click="saveInvoice()">Guardar</button>
+		</div>
 	</div>
 	
 	<div class="row">
@@ -11,8 +17,7 @@
 				<div class="col-lg-4">
 					<div class="from-group">
 						<label>Cliente:</label>
-						<select class="form-control" name="client" id="client" ng-model="invoice.client">
-							<option>Se selecciona un cliente</option>
+						<select class="form-control" name="client" id="client" ng-model="invoice.entity" ng-options="i.firstName for i in clients track by i._id" >
 						</select>
 					</div>
 					<br />
@@ -40,8 +45,7 @@
 					</div>
 					<div class="from-group">
 						<label>Cuenta:</label>
-						<select class="form-control" name="account" id="account" ng-model="invoice.account">
-							<option>Se selecciona una cuenta</option>
+						<select class="form-control" name="account" id="account" ng-model="invoice.account" ng-options="i.name for i in accounts track by i._id" required>
 						</select>
 					</div>
 					<div class="from-group">
@@ -54,13 +58,12 @@
 					</div>
 					<div class="from-group">
 						<label>Forma de Pago:</label>
-						<select class="form-control" name="paymentMethod" id="paymentMethod" ng-model="invoice.paymentMethod">
-							<option>Se selecciona una cuenta</option>
+						<select class="form-control" name="paymentMethod" id="paymentMethod" ng-model="invoice.paymentMethod" ng-options="i.description for i in paymentMethods track by i._id" required>
 						</select>						
 					</div>
 					<div class="from-group">
 						<label>Condici&oacute;n:</label>
-						<select class="form-control" name="condition" id="condition" ng-model="invoice.condition">
+						<select class="form-control" name="condition" id="condition" ng-model="invoice.condition" ng-options="i.description for i in conditions track by i._id" required>
 							<option>Se selecciona una cuenta</option>
 						</select>						
 					</div>										

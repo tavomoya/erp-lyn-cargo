@@ -18,24 +18,45 @@ function Document (db) {
             },
             "status": {
                 "type": "number",
-                "required": true
+                "required": false
             },
             "shipmentId": {
                 "type": "number",
-                "required": true
+                "required": false
             },
             "date": {
                 "type": "date",
-                "required": true
+                "required": false
             },
             "price": {
                 "type": "double",
-                "required": true
+                "required": false
             },
             "creditDays": {
                 "type": "number",
+                "required": false
+            },
+            "account": {
+                "type": "object",
                 "required": true
-            }
+            },
+            "entryDate": {
+                "type": "date",
+                "required": true
+            },
+            "dueDate": {
+                "type": "date",
+                "required": true
+            },
+            "paymentMethod": {
+                "type": "object",
+                "required": true
+            },
+            "condition": {
+                "type": "object",
+                "required": true
+            },
+
         }
     };
 
