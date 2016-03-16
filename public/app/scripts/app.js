@@ -272,6 +272,27 @@ angular
               name: 'erpLynCargoApp',
               files: ['scripts/controllers/shipment.js']
             })
+          },
+          quotations: function(Quotation){
+            return new Quotation().find();
+          },
+          clients : function(Entity){
+            return new Entity().find();
+          },
+          currencies: function (Util){
+            return new Util().getData('CURRENCY');
+          },
+          agents : function(Entity){
+            return new Entity().find();
+          },
+          markets : function(Util){
+            return new Util().getData('COUNTRY');
+          },
+          loadingPorts : function(Util){
+            return new Util().getData('PORT');
+          },
+          dischargePorts : function(Util){
+            return new Util().getData('PORT');
           }
         }
     })

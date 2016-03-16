@@ -48,7 +48,7 @@ function validateSchema (deferred, object, schema) {
 //Para formato de fechas
 function dateParser (object) {
     for (var key in object) {
-        if (/date/.test(key.toLowerCase)) {
+        if (/date/.test(key.toLowerCase())) {
             if (typeof object[key] !== 'object') {
                 object[key] = new Date(object[key]);
             } else {
