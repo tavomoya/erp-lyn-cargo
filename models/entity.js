@@ -6,7 +6,7 @@ var Data = require('./data');
 // Class constructor
 function Entity (db) {
     this.db = db;
-    
+
     //Database Schema
     this.schema = {
         "id": "/Entity",
@@ -58,18 +58,12 @@ function Entity (db) {
             "payrollId": {
                 "type": "number"
             },
+            "birthDate": {
+                "type": "date"
+            }
         }
     };
-
-    this.data = new Data(db, 'ENTITY', this.schema);
 };
-
-//This is a test function
-Entity.prototype.test = function () {
-    var deferred = q.defer();
-    deferred.resolve(':)');
-    return deferred.promise;
-}
 
 // Make the class visible
 module.exports = Entity;

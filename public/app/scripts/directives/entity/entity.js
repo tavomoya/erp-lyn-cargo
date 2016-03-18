@@ -8,38 +8,49 @@ angular.module('erpLynCargoApp')
 			scope: {
 				ngModel: '=',
 				type: '=',
-				countries: '=',
-				provincias: '=',
-				sectores: '=',
 				currencies: '='
 			},
-			controller: function ($scope, Entity, toaster) {
-				$scope.entity = new Entity();
+			controller: function ($scope, toaster, Util, Client, Vendor, Agent) {
+				// Initial Data
+				$scope.entity = ($scope.type === 'Cliente') ? new Client() :
+						($scope.type === 'Proveedor') ? new Vendor() : new Agent();
 				$scope.entityTypes = ['Persona', 'Empresa'];
-				$scope.documentTypes = ['Cedula', 'Pasaporte'];
+				$scope.documentTypes = ['Cédula', 'Pasaporte'];
+				$scope.entity.documentType = $scope.documentTypes[0];
 				$scope.entity.type = 'Persona';
 				$scope.entity.status = 1;
-				$scope.ngModel = $scope.entity;	
+				$scope.ngModel = $scope.entity;
+				new Util().getAddressData()
+				.then(function (res) {
+					$scope.countries = res.data.countries;
+					$scope.provincias = res.data.provinces;
+					$scope.sectores = res.data.municipalities;
+				}, function (err) {
+					console.log('Ooh la muerte', err);
+				});
 
-				$scope.saveEntity = function () {
+				$scope.saveEntity = function (form) {
+					if (form.$invalid) {
+						return;
+					};
 					$scope.entity.save()
 					.then(function (res) {
 						$scope.saved = true;
 						toaster.pop(
-							'success', 
-							$scope.type + ' Guardado', 
+							'success',
+							'',
 							'El '+$scope.type+' ha sido guardado satisfactoriamente.'
 						);
 					}, function (err) {
 						console.log('I got an error :/', err);
 						toaster.pop(
 							'error',
-							'Error!',
+							'',
 							'Ocurrio un error al guardar el '+$scope.type
 						);
 					})
 				};
-		
+
 			}
 		}
 	});

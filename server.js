@@ -107,7 +107,10 @@ d.run(function () {
 	//WebServices
 	require('./routes/account')('/account', app);
 	require('./routes/accountType')('/accountType', app);
+	require('./routes/agent')('/agent', app);
+	require('./routes/client')('/client', app);
 	require('./routes/document')('/document', app);
+	require('./routes/employee')('/employee', app);
 	require('./routes/entity')('/entity', app);
 	require('./routes/item')('/item', app);
 	require('./routes/itemType')('/itemType', app);
@@ -116,6 +119,7 @@ d.run(function () {
   require('./routes/shipment')('/shipment', app);
   require('./routes/shipmentType')('/shipmentType', app);
   require('./routes/util')('/util', app);
+	require('./routes/vendor')('/vendor', app);
 
 
 

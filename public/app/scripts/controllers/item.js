@@ -7,7 +7,10 @@ app.controller('ItemCtrl', function ($scope, $state, Item, itemTypes, toaster) {
   $scope.item = new Item();
   $scope.itemTypes = itemTypes.data;
 
-  $scope.saveItem = function () {
+  $scope.saveItem = function (form) {
+    if (form.$invalid) {
+      return;
+    }
     $scope.item.save()
     .then(function (res) {
       $scope.item = res.data[0];

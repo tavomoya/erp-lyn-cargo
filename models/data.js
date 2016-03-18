@@ -47,7 +47,8 @@ function validateSchema (deferred, object, schema) {
 
 function dateParser (object) {
 	for (var key in object) {
-		if (/date/.test(key.toLowerCase)) {
+
+		if (/date/.test(key.toLowerCase())) {
 			if (typeof object[key] !== 'object') {
 				object[key] = new Date(object[key]);
 			} else {
@@ -62,7 +63,7 @@ function dateParser (object) {
 				object[key][o] = dateParser(object[key][o]);
 			}
 		}
-	}
+	};
 	return object;
 };
 
@@ -93,6 +94,7 @@ Data.prototype.findById = function(id) {
 Data.prototype.insert = function (object) {
 	var deferred = q.defer();
 	var _this = this;
+	object = dateParser(object);
 	// object.createdDate = new Date();
 
 	if (validateSchema(deferred, object, _this.schema)) {

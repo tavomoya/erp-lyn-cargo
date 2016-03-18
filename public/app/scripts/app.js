@@ -18,7 +18,8 @@ angular
     'ui.router',
     'ui.bootstrap',
     'angular-loading-bar',
-    'toaster'
+    'toaster',
+    'ui.mask'
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
 
@@ -48,15 +49,6 @@ angular
         url:'/client',
         controller: 'ClientCtrl',
         resolve: {
-          countries: function (Util) {
-            return new Util().getApiData('COUNTRY');
-          }, 
-          provincias: function (Util) {
-            return new Util().getApiData('PROVINCIA');
-          },
-          sectores: function (Util) {
-            return new Util().getApiData('MUNICIPIO');
-          },
           currencies: function (Util) {
             return new Util().getApiData('CURRENCY');
           }
@@ -69,7 +61,7 @@ angular
         resolve: {
           countries: function (Util) {
             return new Util().getApiData('COUNTRY');
-          }, 
+          },
           provincias: function (Util) {
             return new Util().getApiData('PROVINCIA');
           },
@@ -88,7 +80,7 @@ angular
         resolve: {
           countries: function (Util) {
             return new Util().getApiData('COUNTRY');
-          }, 
+          },
           provincias: function (Util) {
             return new Util().getApiData('PROVINCIA');
           },
@@ -103,7 +95,15 @@ angular
     .state('dashboard.employee',{
         templateUrl:'views/pages/employee.html',
         url:'/employee',
-        controller: 'EmployeeCtrl'
+        controller: 'EmployeeCtrl',
+        resolve: {
+          addressData: function (Util) {
+            return new Util().getAddressData();
+          },
+          currencies: function (Util) {
+            return new Util().getApiData('CURRENCY');
+          }
+        }
     })
     .state('dashboard.item',{
         templateUrl:'views/pages/item.html',

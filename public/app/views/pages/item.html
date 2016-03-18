@@ -8,7 +8,7 @@
 						<i class="fa fa-arrow-left"></i>
 						Regresar
 					</button>
-					<button class="btn btn-primary" ng-click="saveItem()">
+					<button class="btn btn-primary" type="submit" form="itemForm">
 						<i class="fa fa-save"></i>
 						Guardar
 					</button>
@@ -17,30 +17,34 @@
 	</div>
 
 	<div class="row">
-		<form class="form-horizontal" role="form" name="itemForm">
+		<form class="form-horizontal" role="form" name="itemForm" id="itemForm" ng-submit="saveItem(itemForm)" novalidate>
 			<div class="form-group">
 				<label class="col-xs-1 control-label" for="code">C&oacute;digo:</label>
-				<div class="col-xs-3">
+				<div class="col-xs-3" ng-class="{'has-error': itemForm.code.$invalid && itemForm.$submitted}">
 					<input type="text" class="form-control" name="code" id="code" ng-model="item.code" required>
+					<p ng-show="itemForm.code.$invalid && itemForm.$submitted" class="help-block">Este campo es requerido.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-xs-1 control-label" for="name">Nombre:</label>
-				<div class="col-xs-3">
+				<div class="col-xs-3" ng-class="{'has-error': itemForm.name.$invalid && itemForm.$submitted}">
 					<input type="text" class="form-control" name="name" id="name" ng-model="item.name" required>
+					<p ng-show="itemForm.name.$invalid && itemForm.$submitted" class="help-block">Este campo es requerido.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-xs-1 control-label" for="type">Tipo de Item:</label>
-				<div class="col-xs-3">
+				<div class="col-xs-3" ng-class="{'has-error': itemForm.type.$invalid && itemForm.$submitted}">
 					<select class="form-control" name="type" id="type" ng-model="item.itemType" ng-options="i.description for i in itemTypes track by i._id" required>
+					<p ng-show="itemForm.type.$invalid && itemForm.$submitted" class="help-block">Este campo es requerido.</p>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-xs-1 control-label" for="price">Precio:</label>
-				<div class="col-xs-3">
+				<div class="col-xs-3" ng-class="{'has-error': itemForm.price.$invalid && itemForm.$submitted}">
 					<input type="number" class="form-control" name="price" id="price" ng-model="item.price" required>
+					<p ng-show="itemForm.price.$invalid && itemForm.$submitted" class="help-block">Este campo es requerido.</p>
 				</div>
 			</div>
 		</form>
