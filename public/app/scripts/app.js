@@ -306,9 +306,20 @@ angular
               name: 'erpLynCargoApp',
               files: ['scripts/controllers/quote.js']
             })
+          },
+          clients : function(Entity){
+            return new Entity().find();
+          },
+          currencies: function (Util){
+            return new Util().getData('CURRENCY');
+          },
+          loadingPorts : function(Util){
+            return new Util().getData('PORT');
+          },
+          dischargePorts : function(Util){
+            return new Util().getData('PORT');
           }
-        }
-    })
+    }})
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'

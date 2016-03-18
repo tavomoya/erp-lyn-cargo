@@ -3,6 +3,12 @@
 		<div class="col-lg-12">
 			<h1 class="page-header">Expediente</h1>
 		</div>
+		<br>
+		<br>
+		<div class="col-lg-2 pull-right">
+			<button class="btn btn-default" ng-click="goBack()">Regresar</button>
+			<button class="btn btn-primary" ng-click="saveShipment()">Guardar</button>
+		</div>
 	</div>
 	
 	<div class="row">
@@ -26,7 +32,7 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Cotizaci&oacute;n</label>
 							<div class="col-xs-4">
-								<select class="form-control" name="quotation" id="quotation" ng-model="shipment.quotation" ng-options="i.client for i in quotation track by i._id" required>
+								<select class="form-control" name="quotation" id="quotation" ng-model="shipment.quotation" ng-options="i.client.firstName for i in quotation track by i._id" required>
 								</select>	
 							</div>
 						</div>
@@ -49,7 +55,7 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Moneda:</label>
 							<div class="col-xs-4">
-								<select class="form-control" name="currency" id="currency" ng-model="shipment.currency" ng-options="i.cc for i in currency track by i._id"required>
+								<select class="form-control" name="currency" id="currency" ng-model="shipment.currency" ng-options="i.cc for i in currency track by i._id" required>
 								</select>
 							</div>
 						</div>
