@@ -164,16 +164,52 @@ angular
         templateUrl:'views/pages/accountMovements.html',
         url:'/accountMovements'
     })
-    .state('dashboard.shipment',{
+    .state('dashboard.shipment', {
         templateUrl:'views/pages/shipment.html',
         url:'/shipment',
-        controller: 'ShipmentCtrl'
+        controller: 'ShipmentCtrl',
+        resolve: {
+          quotations: function(Quotation){
+            return new Quotation().find();
+          },
+          clients : function(Client){
+            return new Client().find();
+          },
+          currencies: function (Util){
+            return new Util().getData('CURRENCY');
+          },
+          agents : function(Agent){
+            return new Agent().find();
+          },
+          markets : function(Util){
+            return new Util().getData('COUNTRY');
+          },
+          loadingPorts : function(Util){
+            return new Util().getData('PORT');
+          },
+          dischargePorts : function(Util){
+            return new Util().getData('PORT');
+          }
+        }
     })
     .state('dashboard.quote',{
-        templateUrl:'views/pages/quote.html',
-        url:'/quote',
-        controller: 'QuoteCtrl'
-    })
+    templateUrl:'views/pages/quote.html',
+    url:'/quote',
+    controller: 'QuoteCtrl',
+    resolve: {
+      clients : function(Client){
+        return new Client().find();
+      },
+      currencies: function (Util){
+        return new Util().getData('CURRENCY');
+      },
+      loadingPorts : function(Util){
+        return new Util().getData('PORT');
+      },
+      dischargePorts : function(Util){
+        return new Util().getData('PORT');
+      }
+    }})
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
