@@ -2,11 +2,8 @@
 
 var app = angular.module('erpLynCargoApp');
 
-app.controller('AgentCtrl', function ($scope, countries, provincias, sectores, currencies) {
+app.controller('AgentCtrl', function ($scope, currencies) {
 
-	$scope.countries = countries.data;
-	$scope.provincias = provincias.data;
-	$scope.sectores = sectores.data;
 	$scope.currencies = currencies.data;
 
 	$scope.goBack = function () {

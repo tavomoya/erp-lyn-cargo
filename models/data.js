@@ -92,6 +92,7 @@ Data.prototype.findById = function(id) {
 };
 
 Data.prototype.insert = function (object) {
+
 	var deferred = q.defer();
 	var _this = this;
 	object = dateParser(object);
@@ -106,6 +107,7 @@ Data.prototype.insert = function (object) {
 };
 
 Data.prototype.update = function(query, updObject, options) {
+	updObject = dateParser(object);
 	var deferred = q.defer();
 	var _options = (!options) ? {} : options;
 

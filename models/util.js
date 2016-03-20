@@ -21,12 +21,12 @@ exports.error = function (res) {
 	};
 };
 
-exports.getApiData = function (db, collection) {
+exports.getApiData = function(db, collection){
 	var deferred = q.defer();
-	var _collection = db.collection(collection);
 
+	var _collection = db.collection(collection);
 	_collection.find({})
-	.toArray(function (err, data) {
+	.toArray(function(err, data){
 		if (err) {
 			deferred.reject({
 				error: err,

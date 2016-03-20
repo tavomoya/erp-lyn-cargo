@@ -16,4 +16,4 @@ module.exports = function (prefix, app) {
     });
 
     require('./data')(prefix, app, util);
-}
+};

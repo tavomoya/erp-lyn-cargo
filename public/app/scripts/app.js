@@ -14,19 +14,13 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngAnimate',
-    'oc.lazyLoad',
     'ui.router',
     'ui.bootstrap',
     'angular-loading-bar',
     'toaster',
     'ui.mask'
   ])
-  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
-
-    $ocLazyLoadProvider.config({
-      debug:false,
-      events:true,
-    });
+  .config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/dashboard/home');
 
@@ -59,15 +53,6 @@ angular
         url:'/vendor',
         controller: 'VendorCtrl',
         resolve: {
-          countries: function (Util) {
-            return new Util().getApiData('COUNTRY');
-          },
-          provincias: function (Util) {
-            return new Util().getApiData('PROVINCIA');
-          },
-          sectores: function (Util) {
-            return new Util().getApiData('MUNICIPIO');
-          },
           currencies: function (Util) {
             return new Util().getApiData('CURRENCY');
           }
@@ -78,15 +63,6 @@ angular
         url:'/agent',
         controller: 'AgentCtrl',
         resolve: {
-          countries: function (Util) {
-            return new Util().getApiData('COUNTRY');
-          },
-          provincias: function (Util) {
-            return new Util().getApiData('PROVINCIA');
-          },
-          sectores: function (Util) {
-            return new Util().getApiData('MUNICIPIO');
-          },
           currencies: function (Util) {
             return new Util().getApiData('CURRENCY');
           }
@@ -117,15 +93,60 @@ angular
     })
     .state('dashboard.account',{
         templateUrl:'views/pages/account.html',
-        url:'/account'
+        url:'/account',
+        controller: 'AccountCtrl',
+        resolve: {
+          currencies: function (Util){
+            return new Util().getApiData('CURRENCY');
+          },
+          accountTypes: function(AccountType){
+            return new AccountType().find();
+          },
+          banks: function(Util){
+            return new Util().getApiData('BANK');
+          },
+          superAccounts: function(Account){
+            return new Account().find();
+          }
+        }
     })
     .state('dashboard.invoice',{
         templateUrl:'views/pages/invoice.html',
-        url:'/invoice'
+        url:'/invoice',
+        controller: 'InvoiceCtrl',
+        resolve: {
+          clients : function(Client){
+            return new Client().find();
+          },
+          accounts: function(Account){
+            return new Account().find();
+          },
+          paymentMethods: function(Util){
+            return new Util().getApiData('PAYMENTMETHOD');
+          },
+          conditions: function(Util){
+            return new Util().getApiData('CONDITION');
+          }
+        }
     })
     .state('dashboard.bill',{
         templateUrl:'views/pages/bill.html',
-        url:'/bill'
+        url:'/bill',
+        controller: 'BillCtrl',
+        resolve: {
+          providers : function(Vendor){
+            return new Vendor().find();
+          },
+          accounts: function(Account){
+            return new Account().find();
+          },
+          paymentMethods: function(Util){
+            return new Util().getApiData('PAYMENTMETHOD');
+          },
+          conditions: function(Util){
+            return new Util().getApiData('CONDITION');
+          }
+        }
     })
     .state('dashboard.payroll',{
         templateUrl:'views/pages/payroll.html',

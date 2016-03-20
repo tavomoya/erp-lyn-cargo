@@ -122,7 +122,6 @@ d.run(function () {
 	require('./routes/vendor')('/vendor', app);
 
 
-
 	// Routes Principales
 	app.get('/routes', function (req, res) {
 		res.send(app.routes);

@@ -17,7 +17,6 @@ app.factory('Util', function ($http, $q, $state) {
 		}, function (err) {
 			deferred.reject(err);
 		});
-
 		return deferred.promise;
 	};
 
@@ -31,7 +30,6 @@ app.factory('Util', function ($http, $q, $state) {
 		.catch(function (err) {
 			deferred.reject(err);
 		});
-
 		return deferred.promise;
 	};
 
