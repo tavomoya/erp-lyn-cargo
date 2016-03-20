@@ -176,39 +176,39 @@ angular
             return new Client().find();
           },
           currencies: function (Util){
-            return new Util().getData('CURRENCY');
+            return new Util().getApiData('CURRENCY');
           },
           agents : function(Agent){
             return new Agent().find();
           },
           markets : function(Util){
-            return new Util().getData('COUNTRY');
+            return new Util().getApiData('COUNTRY');
           },
           loadingPorts : function(Util){
-            return new Util().getData('PORT');
+            return new Util().getApiData('PORT');
           },
           dischargePorts : function(Util){
-            return new Util().getData('PORT');
+            return new Util().getApiData('PORT');
           }
         }
     })
     .state('dashboard.quote',{
-    templateUrl:'views/pages/quote.html',
-    url:'/quote',
-    controller: 'QuoteCtrl',
-    resolve: {
-      clients : function(Client){
-        return new Client().find();
-      },
-      currencies: function (Util){
-        return new Util().getData('CURRENCY');
-      },
-      loadingPorts : function(Util){
-        return new Util().getData('PORT');
-      },
-      dischargePorts : function(Util){
-        return new Util().getData('PORT');
-      }
+      templateUrl:'views/pages/quote.html',
+      url:'/quote',
+      controller: 'QuoteCtrl',
+      resolve: {
+        clients : function(Client){
+          return new Client().find();
+        },
+        currencies: function (Util){
+          return new Util().getApiData('CURRENCY');
+        },
+        loadingPorts : function(Util){
+          return new Util().getApiData('PORT');
+        },
+        dischargePorts : function(Util){
+          return new Util().getApiData('PORT');
+        }
     }})
       .state('login',{
         templateUrl:'views/pages/login.html',
