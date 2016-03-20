@@ -3,6 +3,12 @@
 		<div class="col-lg-12">
 			<h1 class="page-header">Expediente</h1>
 		</div>
+		<br>
+		<br>
+		<div class="col-lg-2 pull-right">
+			<button class="btn btn-default" ng-click="goBack()">Regresar</button>
+			<button class="btn btn-primary" ng-click="saveShipment()">Guardar</button>
+		</div>
 	</div>
 	
 	<div class="row">
@@ -26,21 +32,15 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Cotizaci&oacute;n</label>
 							<div class="col-xs-4">
-								<select class="form-control" name="quotation" id="quotation" ng-model="shipment.quotation" required>
+								<select class="form-control" name="quotation" id="quotation" ng-model="shipment.quotation" ng-options="i.client.firstName for i in quotation track by i._id" required>
 								</select>	
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Cliente:</label>
 							<div class="col-xs-4">
-								<select class="form-control" name="client" id="client" ng-model="shipment.client" required>
+								<select class="form-control" name="client" id="client" ng-model="shipment.client" ng-options="i.lastName for i in client track by i._id"required>
 								</select>	
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label">Nombre del Expediente:</label>
-							<div class="col-xs-4">
-								<input type="text" class="form-control" name="name" id="name" ng-model="shipment.name" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -55,15 +55,22 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Moneda:</label>
 							<div class="col-xs-4">
-								<select class="form-control" name="currency" id="currency" ng-model="shipment.currency" required>
+								<select class="form-control" name="currency" id="currency" ng-model="shipment.currency" ng-options="i.cc for i in currency track by i._id" required>
 								</select>
 							</div>
 						</div>
 					</form>
 				</div>
 				<div ng-if="activeTab == 2">
-				<!-- Soy yo mismo xD (Gregory) -->
-				<span>Aqui habran cosas que Luis pondra porque Gregory no sabe :P</span> 
+					<br>
+					<form class="form-horizontal" role="form" name="">
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Descripci&oacute;n</label>
+							<div class="col-xs-4">
+								<textarea class="form-control" name="merchDescription" id="merchDescription" ng-model="shipment.merchDescription"></textarea>
+							</div>
+						</div>
+					</form>
 				</div>
 				<div ng-if="activeTab == 3">
 					<!-- Soy yo mismo xD (Gregory) -->
@@ -75,28 +82,28 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Agente:</label>
 							<div class="col-xs-4">
-								<select class="form-control" name="agent" id="agent" ng-model="shipment.agent">
+								<select class="form-control" name="agent" id="agent" ng-model="shipment.agent" ng-options="i.firstName for i in agent track by i._id">
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Mercado:</label>
 							<div class="col-xs-4">
-								<select class="form-control" name="market" id="market" ng-model="shipment.market">
+								<select class="form-control" name="market" id="market" ng-model="shipment.market" ng-options="i.name.common for i in market track by i._id">
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Puerto de Embarque:</label>
 							<div class="col-xs-4">
-								<select class="form-control" name="loadingPort" id="loadingPort" ng-model="shipment.loadingPort">
+								<select class="form-control" name="loadingPort" id="loadingPort" ng-model="shipment.loadingPort" ng-options="i.description for i in loadingPort track by i._id">
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Puerto de Desembarque:</label>
 							<div class="col-xs-4">
-								<select class="form-control" name="dischargePort" id="dischargePort" ng-model="shipment.dischargePort">
+								<select class="form-control" name="dischargePort" id="dischargePort" ng-model="shipment.dischargePort" ng-options="i.description for i in dischargePort track by i._id">
 								</select>
 							</div>
 						</div>
@@ -115,7 +122,7 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Shipper:</label>
 							<div class="col-xs-4">
-								<input type="text" class="form-control" name="shipper" id="shipper" ng-model="shipment.shipper">
+								<input type="text" class="form-control" name="shipper" id="shipper" ng-model="shipment.from">
 							</div>
 						</div>
 						<div class="form-group">

@@ -12,40 +12,35 @@ function Shipment (db) {
         "id": "/Shipment",
         "type": "object",
         "properties": {
-            "quotationId": {
-                "type": "number"
+            "quotation": {
+                "type": "object"
             },
-            "clientId": {
-                "type": "number",
-                "required": true
-            },
-            "agentId": {
-                "type": "number",
-                "required": true
-            },
-            "transporterId": {
-                "type": "number",
-                "required": true
-            },
-            "shipmentType": {
+            "client": {
                 "type": "object",
                 "required": true
             },
-            "consignatorExporter": {
-                "type": "string",
+            "agent": {
+                "type": "object",
                 "required": true
             },
+            "transporterId": {
+                "type": "number"
+            },
+            "shipmentType": {
+                "type": "object"
+            },
+            "consignatorExporter": {
+                "type": "string"
+            },
             "status": {
-                "type": "number",
-                "required": true
+                "type": "number"
             },
             "from": {
                 "type": "string",
                 "required": true
             },
             "to": {
-                "type": "string",
-                "required": true
+                "type": "string"
             },
             "weight": {
                 "type": "number"
@@ -58,6 +53,46 @@ function Shipment (db) {
             },
             "merchDescription": {
                 "type": "string"
+            },
+            "startDate": {
+                "type": "date",
+                "required": true
+            },
+            "endDate": {
+                "type": "date",
+                "required": true
+            },
+            "currency": {
+                "type": "object",
+                "required": true
+            },
+            "market": {
+                "type": "object",
+                "required": true
+            },
+            "loadingPort": {
+                "type": "object",
+                "required": true
+            },
+            "dischargePort": {
+                "type": "object",
+                "required": true
+            },
+            "shipName": {
+                "type": "string",
+                "required": true
+            },
+            "trip": {
+                "type": "string",
+                "required": true
+            },
+            "departureDate": {
+                "type": "date",
+                "required": true
+            },
+            "landingDate": {
+                "type": "date",
+                "required": true
             }
         }
     };
