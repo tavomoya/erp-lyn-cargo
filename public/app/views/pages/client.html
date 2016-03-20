@@ -1,11 +1,22 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">Cliente</h1>
+		<div class="page-header">
+			<h1>Cliente</h1>
+			<div class="pull-right btn-container">
+					<toaster-container toaster-options="{'time-out': 5000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
+					<button class="btn btn-default" ng-click="goBack()">
+						<i class="fa fa-arrow-left"></i>
+						Regresar
+					</button>
+					<button class="btn btn-primary" type="submit" form="entityForm" ng-click="saveEntity()">
+						<i class="fa fa-save"></i>
+						Guardar
+					</button>
+			</div>
 		</div>
 	</div>
-	
-	<div class="row">	
-		<entity ng-model="client" type="'Cliente'"></entity>
+
+	<div class="row">
+		<entity ng-model="client" type="'Cliente'" currencies="currencies"></entity>
 	</div>
 </div>

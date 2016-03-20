@@ -4,24 +4,32 @@ var app = angular.module('erpLynCargoApp');
 
 app.factory('Util', function ($http, $q, $state) {
 
-	var Util;
-
-	
-	function Util() {
-		this.apiPath = "/util";
+	function Util(propValues) {
+		this.apiPath = '/util';
 	}
 
-	Util.prototype.getData = function (collection) {
+	Util.prototype.getApiData = function (collection) {
 		var deferred = $q.defer();
-		var _this = this;
-		$http.get(_this.apiPath + '/' + collection)
-		.then(function(res) {
+
+		$http.get(this.apiPath+ '/collection/'+collection)
+		.then(function (res) {
 			deferred.resolve(res);
-		}, function(err){
-			console.log('Algo salio mal :/', err);
+		}, function (err) {
 			deferred.reject(err);
 		});
+		return deferred.promise;
+	};
 
+	Util.prototype.getAddressData = function () {
+		var deferred = $q.defer();
+
+		$http.get(this.apiPath + '/addressData')
+		.then(function (res) {
+			deferred.resolve(res);
+		})
+		.catch(function (err) {
+			deferred.reject(err);
+		});
 		return deferred.promise;
 	};
 

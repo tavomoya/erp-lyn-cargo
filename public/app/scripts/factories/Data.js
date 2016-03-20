@@ -106,7 +106,7 @@ app.factory('Data', function ($http, $q, $rootScope) {
 		if (!object) {
 			object = _this.getData();
 		}
-		console.log('que estoy haciendo mal?', object);
+
 		if (!_this._id) {
 			$http.post(_this.apiPath, {obj: object})
 			.then(function (res) {

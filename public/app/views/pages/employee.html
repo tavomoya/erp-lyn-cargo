@@ -1,114 +1,204 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">Empleado</h1>
+		<div class="page-header">
+			<h1>Empleado</h1>
+			<div class="pull-right btn-container">
+					<toaster-container toaster-options="{'time-out': 5000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
+					<button class="btn btn-default" ng-click="goBack()">
+						<i class="fa fa-arrow-left"></i>
+						Regresar
+					</button>
+					<button class="btn btn-primary" type="submit" form="entityForm">
+						<i class="fa fa-save"></i>
+						Guardar
+					</button>
+			</div>
 		</div>
 	</div>
-	
+
 	<div class="row">
-		
-		<div class="panel panel-default">
-			<div class="panel panel-heading">
-				Informaci&oacute;n del Empleado
-			</div>	
-			<div class="panel panel-body">
-				<!-- Tabs -->
-				<ul class="nav nav-tabs">
-					<li ng-class="{'active': activeTab == 1}"><a ng-click="activeTab = 1" data-toggle="tab">Informaci&oacute;n Personal</a>
-					</li>
-					<li ng-class="{'active': activeTab == 2}"><a ng-click="activeTab = 2" data-toggle="tab">Informaci&oacute;n de Empleado</a>
-					</li>
-					<li ng-class="{'active': activeTab == 3}"><a ng-click="activeTab = 3" data-toggle="tab">Amonestaciones</a>
-					</li>
-				</ul>
-				
-				<div class="tab-content">
-					<div class="tab-pane active">
-						<div ng-if="activeTab == 1">
-							<entity ng-model="employee" type="'Empleado'"></entity>
-						</div>
-						<div ng-if="activeTab == 2">
+		<!-- Tabs -->
+		<ul class="nav nav-tabs">
+			<li ng-class="{'active': activeTab == 1}"><a ng-click="activeTab = 1" data-toggle="tab">Informaci&oacute;n Personal</a>
+			</li>
+			<li ng-class="{'active': activeTab == 2}"><a ng-click="activeTab = 2" data-toggle="tab">Informaci&oacute;n de Empleado</a>
+			</li>
+			<li ng-class="{'active': activeTab == 3}"><a ng-click="activeTab = 3" data-toggle="tab">Amonestaciones</a>
+			</li>
+		</ul>
+
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div ng-if="activeTab == 1">
+					<br>
+					<form class="form-horizontal" role="form" name="entityForm" id="entityForm" ng-submit="saveEmployee(entityForm)" novalidate>
+						<fieldset ng-disabled="saved">
 							<div class="form-group">
-								<label class="col-xs-2 control-label">N&oacute;mina a la que pertenece:</label>
-								<div class="col-xs-4">
-									<select class="form-control" name="payroll" id="payroll" ng-model="employee.payroll" required>
-									</select>	
+								<label class="col-xs-2 control-label">Nombre:</label>
+								<div class="col-xs-4" ng-class="{'has-error': entityForm.firstName.$invalid && entityForm.$submitted}">
+									<input type="text" class="form-control" name="firstName" id="firstName" ng-model="employee.firstName" placeholder="Ingrese el nombre"
+									required>
+									<p ng-show="entityForm.firstName.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
-							<br>
-							<div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">Departamento:</label>
-								<div class="col-xs-4">
-									<select class="form-control" name="department" id="department" ng-model="employee.department" required>
-									</select>	
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Apellido:</label>
+								<div class="col-xs-4" ng-class="{'has-error': entityForm.lastName.$invalid && entityForm.$submitted}">
+									<input type="text" class="form-control" name="lastName" id="lastName" ng-model="employee.lastName" placeholder="Ingrese el apellido"
+									required>
+									<p ng-show="entityForm.lastName.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
-							<div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">Cargo:</label>
-								<div class="col-xs-4">
-									<input type="text" class="form-control" name="position" id="position" ng-model="employee.position" required>	
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Fecha de Nacimiento:</label>
+								<div class="col-xs-2" ng-class="{'has-error': entityForm.birthDate.$invalid && entityForm.$submitted}">
+									<input type="date" class="form-control" name="birthDate" id="birthDate" ng-model="employee.birthDate" required>
+									<p ng-show="entityForm.birthDate.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
-							<div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">Horario:</label>
+							<hr>
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Tipo de Documento:</label>
 								<div class="col-xs-4">
-									<select class="form-control" name="schedule" id="schedule" ng-model="employee.schedule" required>
-									</select>	
+									<select class="form-control" name="documentType" ng-model="employee.documentType" ng-options="dt for dt in documentTypes" required></select>
 								</div>
 							</div>
-							<div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">Sucursal:</label>
-								<div class="col-xs-4">
-									<select class="form-control" name="office" id="office" ng-model="employee.office" required>
-									</select>	
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Documento de Identidad:</label>
+								<div class="col-xs-4" ng-class="{'has-error': entityForm.documentNumber.$invalid && entityForm.$submitted}">
+									<input type="text" ng-if="employee.documentType === documentTypes[0]" cedula class="form-control" name="documentNumber" id="documentNumber" ng-model="employee.documentNumber" ui-mask="999-9999999-9" required>
+									<input type="text" ng-if="employee.documentType === documentTypes[1]" class="form-control" name="documentNumber" id="documentNumber" maxlength="9" ng-model="employee.documentNumber" required>
+									<p ng-show="entityForm.documentNumber.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
-							<div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">Sueldo:</label>
-								<div class="col-xs-4">
-									<input type="text" class="form-control" name="salary" id="salary" ng-model="employee.salary" required>
+							<hr>
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Pa&iacute;s:</label>
+								<div class="col-xs-4" ng-class="{'has-error': entityForm.country.$invalid && entityForm.$submitted}">
+									<select class="form-control" name="country" ng-model="employee.address.country" ng-options="c.name.common for c in countries track by c._id" required></select>
+									<p ng-show="entityForm.country.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
-							<div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">Superior:</label>
-								<div class="col-xs-4">
-									<select class="form-control" name="sup" id="sup" ng-model="employee.sup" required>
-									</select>	
-								</div>
-							</div><div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">Fecha de Inicio:</label>
-								<div class="col-xs-4">
-									<input type="date" class="form-control" name="startDate" id="startDate" ng-model="employee.startDate" required>
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Provincia:</label>
+								<div class="col-xs-4" ng-class="{'has-error': entityForm.province.$invalid && entityForm.$submitted}">
+									<select class="form-control" name="province" ng-model="employee.address.province" ng-options="p.nombre for p in provincias track by p._id" required></select>
+									<p ng-show="entityForm.province.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
-							<div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">Tipo de Cuenta:</label>
-								<div class="col-xs-4">
-									<select class="form-control" name="accountType" id="accountType" ng-model="employee.accountType" required>
-									</select>	
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Sector:</label>
+								<div class="col-xs-4" ng-class="{'has-error': entityForm.sector.$invalid && entityForm.$submitted}">
+									<select class="form-control" name="sector" ng-model="employee.address.sector" ng-options="s.nombre for s in sectores track by s._id" required></select>
+									<p ng-show="entityForm.sector.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
-							<div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">Banco:</label>
-								<div class="col-xs-4">
-									<select class="form-control" name="bank" id="bank" ng-model="employee.bank" required>
-									</select>	
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Direcci&oacute;n:</label>
+								<div class="col-xs-4" ng-class="{'has-error': entityForm.address.$invalid && entityForm.$submitted}">
+									<textarea class="form-control" name="address" ng-model="employee.address.description" required></textarea>
+									<p ng-show="entityForm.address.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
-							<div class="form-group col-xs-6">
-								<label class="col-xs-2 control-label">No. de Cuenta:</label>
-								<div class="col-xs-4">
-									<select class="form-control" name="bankAccount" id="bankAccount" ng-model="employee.bankAccount" required>
-									</select>	
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Tel&eacute;fono:</label>
+								<div class="col-xs-4" ng-class="{'has-error': entityForm.phone.$invalid && entityForm.$submitted}">
+									<input type="tel" class="form-control" name="phone" id="phone" ng-model="employee.phone" ui-mask="(999) 999-9999" required>
+									<p ng-show="entityForm.phone.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
-						</div>
-						<div ng-if="activeTab == 3">
-							<p>Aqui se pondran las amonestaciones</p>
-						</div>	
-					</div>	
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Correo Electr&oacute;nico:</label>
+								<div class="col-xs-4" ng-class="{'has-error': entityForm.email.$invalid && entityForm.$submitted}">
+									<input type="email" class="form-control" name="email" id="email" ng-model="employee.email" required>
+									<p ng-show="entityForm.email.$invalid && entityForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
+							</div>
+						</fieldset>
+					</form>
 				</div>
-			</div>	
-		</div>	
+				<div ng-if="activeTab == 2">
+					<br>
+					<br>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">N&oacute;mina a la que pertenece:</label>
+						<div class="col-xs-8">
+							<select class="form-control" name="payroll" id="payroll" ng-model="employee.payroll" required>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">Departamento:</label>
+						<div class="col-xs-8">
+							<select class="form-control" name="department" id="department" ng-model="employee.department" required>
+							</select>
+						</div>
+					</div>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">Cargo:</label>
+						<div class="col-xs-8">
+							<input type="text" class="form-control" name="position" id="position" ng-model="employee.position" required>
+						</div>
+					</div>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">Horario:</label>
+						<div class="col-xs-8">
+							<select class="form-control" name="schedule" id="schedule" ng-model="employee.schedule" required>
+							</select>
+						</div>
+					</div>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">Sucursal:</label>
+						<div class="col-xs-8">
+							<select class="form-control" name="office" id="office" ng-model="employee.office" required>
+							</select>
+						</div>
+					</div>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">Sueldo:</label>
+						<div class="col-xs-8">
+							<input type="text" class="form-control" name="salary" id="salary" ng-model="employee.salary" required>
+						</div>
+					</div>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">Superior:</label>
+						<div class="col-xs-8">
+							<select class="form-control" name="sup" id="sup" ng-model="employee.sup" required>
+							</select>
+						</div>
+					</div><div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">Fecha de Inicio:</label>
+						<div class="col-xs-8">
+							<input type="date" class="form-control" name="hiredDate" id="hiredDate" ng-model="employee.hiredDate" required>
+						</div>
+					</div>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">Tipo de Cuenta:</label>
+						<div class="col-xs-8">
+							<select class="form-control" name="accountType" id="accountType" ng-model="employee.accountType" required>
+							</select>
+						</div>
+					</div>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">Banco:</label>
+						<div class="col-xs-8">
+							<select class="form-control" name="bank" id="bank" ng-model="employee.bank" required>
+							</select>
+						</div>
+					</div>
+					<div class="form-group col-xs-6">
+						<label class="col-xs-4 control-label">No. de Cuenta:</label>
+						<div class="col-xs-8">
+							<select class="form-control" name="bankAccount" id="bankAccount" ng-model="employee.bankAccount" required>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div ng-if="activeTab == 3">
+					<p>Aqui se pondran las amonestaciones</p>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
