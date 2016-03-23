@@ -2,7 +2,7 @@
 
 var app = angular.module('erpLynCargoApp');
 
-app.controller('InvoiceCtrl', function ($scope, $state, Document, clients, accounts, paymentMethods, conditions) {
+app.controller('InvoiceCtrl', function ($scope, $state, Document, clients, accounts, paymentMethods, conditions, toaster) {
   
   $scope.invoice = new Document();
   $scope.clients = clients.data;
@@ -11,12 +11,17 @@ app.controller('InvoiceCtrl', function ($scope, $state, Document, clients, accou
   $scope.conditions = conditions.data
   //console.log(paymentMethodss);
 
-  $scope.saveInvoice = function () {
+  $scope.saveInvoice = function (form) {
+    if (form.$invalid) {
+      return;
+    }
     $scope.invoice.save()
     .then(function (res) {
-      console.log('lo grabo!', res);
+      $scope.bill = res.data[0];
+      toaster.pop('success', 'Factura guardada', 'La factura se ha guardado satisfactorimente');
     }, function (err) {
       console.log('No lo grabo :/ ', err);
+      toaster.pop('error', 'Error', 'Ocurrio un error al tratar de guardar la factura');
     });
   };
 
