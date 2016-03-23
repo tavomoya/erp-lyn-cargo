@@ -20,7 +20,7 @@ app.controller('ShipmentCtrl', function($scope, $state, Shipment, quotations, cl
     }
       $scope.shipment.save()
       .then(function (res) {
-        $scope.bill = res.data[0];
+        $scope.shipment = res.data[0];
         toaster.pop('success', 'Expediente guardado', 'El expediente se ha guardado satisfactorimente');
       }, function (err) {
         console.log('No lo grabo :/ ', err);

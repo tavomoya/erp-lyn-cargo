@@ -18,7 +18,7 @@ app.controller('AccountCtrl', function ($scope, $state, Account, currencies, acc
     }
     $scope.account.save()
     .then(function (res) {
-      $scope.bill = res.data[0];
+      $scope.account = res.data[0];
       toaster.pop('success', 'Cuenta guardada', 'La Cuenta se ha guardado satisfactorimente');
     }, function (err) {
       console.log('No lo grabo :/ ', err);

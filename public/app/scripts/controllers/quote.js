@@ -17,7 +17,7 @@ app.controller('QuoteCtrl', function($scope, $state, Quotation, clients, currenc
     }
       $scope.quote.save()
       .then(function (res) {
-        $scope.bill = res.data[0];
+        $scope.quote = res.data[0];
         toaster.pop('success', 'Cotización guardada', 'La cotización se ha guardado satisfactorimente');
       }, function (err) {
         console.log('No lo grabo :/ ', err);

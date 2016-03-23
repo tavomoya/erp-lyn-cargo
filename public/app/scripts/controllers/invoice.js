@@ -17,7 +17,7 @@ app.controller('InvoiceCtrl', function ($scope, $state, Document, clients, accou
     }
     $scope.invoice.save()
     .then(function (res) {
-      $scope.bill = res.data[0];
+      $scope.invoice = res.data[0];
       toaster.pop('success', 'Factura guardada', 'La factura se ha guardado satisfactorimente');
     }, function (err) {
       console.log('No lo grabo :/ ', err);
