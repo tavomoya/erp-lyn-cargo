@@ -85,3 +85,7 @@ background-color: #eee;
 .borderless td, th, tr{
   border: none;
 }
+
+.btn-container {
+  margin-top: -45px;
+}

@@ -1,7 +1,18 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">Expediente</h1>
+		<div class="page-header">
+			<h1>Expediente</h1>
+			<div class="pull-right btn-container">
+					<toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
+					<button class="btn btn-default" ng-click="goBack()">
+						<i class="fa fa-arrow-left"></i>
+						Regresar
+					</button>
+					<button class="btn btn-primary" type="submit" form="shipmentForm">
+						<i class="fa fa-save"></i>
+						Guardar
+					</button>
+			</div>
 		</div>
 	</div>
 	
@@ -22,48 +33,67 @@
 			<div class="tab-pane active">
 				<div ng-if="activeTab == 1">
 					<br>
-					<form class="form-horizontal" role="form" name="shipmentForm">
+					<form class="form-horizontal" role="form" name="shipmentForm" id="shipmentForm" ng-submit="saveShipment(shipmentForm)" novalidate>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Cotizaci&oacute;n</label>
-							<div class="col-xs-4">
-								<select class="form-control" name="quotation" id="quotation" ng-model="shipment.quotation" required>
-								</select>	
+							<div ng-class="{'has-error': shipmentForm.quotation.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<select class="form-control" name="quotation" id="quotation" ng-model="shipment.quotation" ng-options="i.client.firstName for i in quotation track by i._id" required>
+									</select>	
+									<p ng-show="shipmentForm.quotation.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Cliente:</label>
-							<div class="col-xs-4">
-								<select class="form-control" name="client" id="client" ng-model="shipment.client" required>
-								</select>	
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label">Nombre del Expediente:</label>
-							<div class="col-xs-4">
-								<input type="text" class="form-control" name="name" id="name" ng-model="shipment.name" required>
+							<div ng-class="{'has-error': shipmentForm.client.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<select class="form-control" name="client" id="client" ng-model="shipment.client" ng-options="i.lastName for i in client track by i._id"required>
+									</select>	
+									<p ng-show="shipmentForm.client.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Fecha de Inicio/Fecha de Fin:</label>
-							<div class="col-xs-2">
-								<input type="date" class="form-control" name="startDate" id="startDate" ng-model="shipment.startDate" required>
+							<div ng-class="{'has-error': shipmentForm.startDate.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-2">
+									<input type="date" class="form-control" name="startDate" id="startDate" ng-model="shipment.startDate" required>
+									<p ng-show="shipmentForm.startDate.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
-							<div class="col-xs-2">
-								<input type="date" class="form-control" name="endDate" id="endDate" ng-model="shipment.endDate" required>
+							<div ng-class="{'has-error': shipmentForm.endDate.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-2">
+									<input type="date" class="form-control" name="endDate" id="endDate" ng-model="shipment.endDate" required>
+									<p ng-show="shipmentForm.endDate.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Moneda:</label>
-							<div class="col-xs-4">
-								<select class="form-control" name="currency" id="currency" ng-model="shipment.currency" required>
-								</select>
+							<div ng-class="{'has-error': shipmentForm.currency.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<select class="form-control" name="currency" id="currency" ng-model="shipment.currency" ng-options="i.cc for i in currency track by i._id" required>
+									</select>
+									<p ng-show="shipmentForm.currency.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 					</form>
 				</div>
 				<div ng-if="activeTab == 2">
-				<!-- Soy yo mismo xD (Gregory) -->
-				<span>Aqui habran cosas que Luis pondra porque Gregory no sabe :P</span> 
+					<br>
+					<form class="form-horizontal" role="form" name="shipmentForm" id="shipmentForm" ng-submit="saveShipment(shipmentForm)" novalidate>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Descripci&oacute;n</label>
+							<div ng-class="{'has-error': shipmentForm.merchDescription.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<textarea class="form-control" name="merchDescription" id="merchDescription" ng-model="shipment.merchDescription"></textarea>
+									<p ng-show="shipmentForm.merchDescription.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
 				<div ng-if="activeTab == 3">
 					<!-- Soy yo mismo xD (Gregory) -->
@@ -71,60 +101,87 @@
 				</div>
 				<div ng-if="activeTab == 4">
 					<br>
-					<form class="form-horizontal" role="form" name="">
+					<form class="form-horizontal" role="form" name="shipmentForm" id="shipmentForm" ng-submit="saveShipment(shipmentForm)" novalidate>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Agente:</label>
-							<div class="col-xs-4">
-								<select class="form-control" name="agent" id="agent" ng-model="shipment.agent">
-								</select>
+							<div ng-class="{'has-error': shipmentForm.agent.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<select class="form-control" name="agent" id="agent" ng-model="shipment.agent" ng-options="i.firstName for i in agent track by i._id" required>
+									</select>
+									<p ng-show="shipmentForm.agent.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Mercado:</label>
-							<div class="col-xs-4">
-								<select class="form-control" name="market" id="market" ng-model="shipment.market">
-								</select>
+							<div ng-class="{'has-error': shipmentForm.market.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<select class="form-control" name="market" id="market" ng-model="shipment.market" ng-options="i.name.common for i in market track by i._id" required>
+									</select>
+									<p ng-show="shipmentForm.market.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Puerto de Embarque:</label>
-							<div class="col-xs-4">
-								<select class="form-control" name="loadingPort" id="loadingPort" ng-model="shipment.loadingPort">
-								</select>
+							<div ng-class="{'has-error': shipmentForm.loadingPort.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<select class="form-control" name="loadingPort" id="loadingPort" ng-model="shipment.loadingPort" ng-options="i.description for i in loadingPort track by i._id" required>
+									</select>
+									<p ng-show="shipmentForm.loadingPort.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Puerto de Desembarque:</label>
-							<div class="col-xs-4">
-								<select class="form-control" name="dischargePort" id="dischargePort" ng-model="shipment.dischargePort">
-								</select>
+							<div ng-class="{'has-error': shipmentForm.dischargePort.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<select class="form-control" name="dischargePort" id="dischargePort" ng-model="shipment.dischargePort" ng-options="i.description for i in dischargePort track by i._id" required>
+									</select>
+									<p ng-show="shipmentForm.dischargePort.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Embarcaci&oacute;n:</label>
-							<div class="col-xs-4">
-								<input type="text" class="form-control" name="shipName" id="shipName" ng-model="shipment.shipName">
+							<div ng-class="{'has-error': shipmentForm.shipName.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<input type="text" class="form-control" name="shipName" id="shipName" ng-model="shipment.shipName"required>
+									<p ng-show="shipmentForm.shipName.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Viaje:</label>
-							<div class="col-xs-4">
-								<input type="text" class="form-control" name="trip" id="trip" ng-model="shipment.trip">
+							<div ng-class="{'has-error': shipmentForm.trip.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<input type="text" class="form-control" name="trip" id="trip" ng-model="shipment.trip" required>
+									<p ng-show="shipmentForm.trip.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Shipper:</label>
-							<div class="col-xs-4">
-								<input type="text" class="form-control" name="shipper" id="shipper" ng-model="shipment.shipper">
+							<div ng-class="{'has-error': shipmentForm.shipper.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-4">
+									<input type="text" class="form-control" name="shipper" id="shipper" ng-model="shipment.from" required>
+									<p ng-show="shipmentForm.shipper.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Fecha Estimada de Salida/Llegada:</label>
-							<div class="col-xs-2">
-								<input type="date" class="form-control" name="departureDate" id="departureDate" ng-model="shipment.departureDate" required>
+							<div ng-class="{'has-error': shipmentForm.departureDate.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-2">
+									<input type="date" class="form-control" name="departureDate" id="departureDate" ng-model="shipment.departureDate" required>
+									<p ng-show="shipmentForm.departureDate.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
-							<div class="col-xs-2">
-								<input type="date" class="form-control" name="landingDate" id="landingDate" ng-model="shipment.landingDate" required>
+							<div ng-class="{'has-error': shipmentForm.landingDate.$invalid && shipmentForm.$submitted}">
+								<div class="col-xs-2">
+									<input type="date" class="form-control" name="landingDate" id="landingDate" ng-model="shipment.landingDate" required>
+									<p ng-show="shipmentForm.landingDate.$invalid && shipmentForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
 							</div>
 						</div>
 					</form>

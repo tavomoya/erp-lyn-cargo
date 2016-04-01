@@ -9,89 +9,30 @@
  */
 angular
   .module('erpLynCargoApp', [
-    'oc.lazyLoad',
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'ngTouch',
+    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
     'angular-loading-bar',
+    'toaster',
+    'ui.mask'
   ])
-  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
-    
-    $ocLazyLoadProvider.config({
-      debug:false,
-      events:true,
-    });
+  .config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/dashboard/home');
 
     $stateProvider
       .state('dashboard', {
         url:'/dashboard',
-        templateUrl: 'views/dashboard/main.html',
-        resolve: {
-            loadMyDirectives:function($ocLazyLoad){
-                return $ocLazyLoad.load(
-                {
-                    name:'erpLynCargoApp',
-                    files:[
-                    'scripts/directives/header/header.js',
-                    'scripts/directives/header/header-notification/header-notification.js',
-                    'scripts/directives/sidebar/sidebar.js',
-                    'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
-                    ]
-                }),
-                $ocLazyLoad.load(
-                {
-                   name:'toggle-switch',
-                   files:["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
-                          "bower_components/angular-toggle-switch/angular-toggle-switch.css"
-                      ]
-                }),
-                $ocLazyLoad.load(
-                {
-                  name:'ngAnimate',
-                  files:['bower_components/angular-animate/angular-animate.js']
-                })
-                $ocLazyLoad.load(
-                {
-                  name:'ngCookies',
-                  files:['bower_components/angular-cookies/angular-cookies.js']
-                })
-                $ocLazyLoad.load(
-                {
-                  name:'ngResource',
-                  files:['bower_components/angular-resource/angular-resource.js']
-                })
-                $ocLazyLoad.load(
-                {
-                  name:'ngSanitize',
-                  files:['bower_components/angular-sanitize/angular-sanitize.js']
-                })
-                $ocLazyLoad.load(
-                {
-                  name:'ngTouch',
-                  files:['bower_components/angular-touch/angular-touch.js']
-                })
-            }
-        }
+        templateUrl: 'views/dashboard/main.html'
     })
       .state('dashboard.home',{
         url:'/home',
         controller: 'MainCtrl',
-        templateUrl:'views/dashboard/home.html',
-        resolve: {
-          loadMyFiles:function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name:'erpLynCargoApp',
-              files:[
-              'scripts/controllers/main.js',
-              'scripts/directives/timeline/timeline.js',
-              'scripts/directives/notifications/notifications.js',
-              'scripts/directives/chat/chat.js',
-              'scripts/directives/dashboard/stats/stats.js'
-              ]
-            })
-          }
-        }
+        templateUrl:'views/dashboard/home.html'
       })
       .state('dashboard.form',{
         templateUrl:'views/form.html',
@@ -100,42 +41,30 @@ angular
       .state('dashboard.client',{
         templateUrl:'views/pages/client.html',
         url:'/client',
+        controller: 'ClientCtrl',
         resolve: {
-          loadMyFiles:function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name:'erpLynCargoApp',
-              files:[
-              'scripts/directives/entity/entity.js',
-              ]
-            })
+          currencies: function (Util) {
+            return new Util().getApiData('CURRENCY');
           }
         }
     })
     .state('dashboard.vendor',{
         templateUrl:'views/pages/vendor.html',
         url:'/vendor',
+        controller: 'VendorCtrl',
         resolve: {
-          loadMyFiles:function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name:'erpLynCargoApp',
-              files:[
-              'scripts/directives/entity/entity.js',
-              ]
-            })
+          currencies: function (Util) {
+            return new Util().getApiData('CURRENCY');
           }
         }
     })
     .state('dashboard.agent',{
         templateUrl:'views/pages/agent.html',
         url:'/agent',
+        controller: 'AgentCtrl',
         resolve: {
-          loadMyFiles:function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name:'erpLynCargoApp',
-              files:[
-              'scripts/directives/entity/entity.js',
-              ]
-            })
+          currencies: function (Util) {
+            return new Util().getApiData('CURRENCY');
           }
         }
     })
@@ -144,32 +73,80 @@ angular
         url:'/employee',
         controller: 'EmployeeCtrl',
         resolve: {
-          loadMyFiles:function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name:'erpLynCargoApp',
-              files:[
-              'scripts/directives/entity/entity.js',
-              'scripts/controllers/employee.js'
-              ]
-            })
+          addressData: function (Util) {
+            return new Util().getAddressData();
+          },
+          currencies: function (Util) {
+            return new Util().getApiData('CURRENCY');
           }
         }
     })
     .state('dashboard.item',{
         templateUrl:'views/pages/item.html',
-        url:'/item'
+        url:'/item',
+        controller: 'ItemCtrl',
+        resolve: {
+          itemTypes: function (ItemType) {
+            return new ItemType().find();
+          }
+        }
     })
     .state('dashboard.account',{
         templateUrl:'views/pages/account.html',
-        url:'/account'
+        url:'/account',
+        controller: 'AccountCtrl',
+        resolve: {
+          currencies: function (Util){
+            return new Util().getApiData('CURRENCY');
+          },
+          accountTypes: function(AccountType){
+            return new AccountType().find();
+          },
+          banks: function(Util){
+            return new Util().getApiData('BANK');
+          },
+          superAccounts: function(Account){
+            return new Account().find();
+          }
+        }
     })
     .state('dashboard.invoice',{
         templateUrl:'views/pages/invoice.html',
-        url:'/invoice'
+        url:'/invoice',
+        controller: 'InvoiceCtrl',
+        resolve: {
+          clients : function(Client){
+            return new Client().find();
+          },
+          accounts: function(Account){
+            return new Account().find();
+          },
+          paymentMethods: function(Util){
+            return new Util().getApiData('PAYMENTMETHOD');
+          },
+          conditions: function(Util){
+            return new Util().getApiData('CONDITION');
+          }
+        }
     })
     .state('dashboard.bill',{
         templateUrl:'views/pages/bill.html',
-        url:'/bill'
+        url:'/bill',
+        controller: 'BillCtrl',
+        resolve: {
+          providers : function(Vendor){
+            return new Vendor().find();
+          },
+          accounts: function(Account){
+            return new Account().find();
+          },
+          paymentMethods: function(Util){
+            return new Util().getApiData('PAYMENTMETHOD');
+          },
+          conditions: function(Util){
+            return new Util().getApiData('CONDITION');
+          }
+        }
     })
     .state('dashboard.payroll',{
         templateUrl:'views/pages/payroll.html',
@@ -187,32 +164,52 @@ angular
         templateUrl:'views/pages/accountMovements.html',
         url:'/accountMovements'
     })
-    .state('dashboard.shipment',{
+    .state('dashboard.shipment', {
         templateUrl:'views/pages/shipment.html',
         url:'/shipment',
         controller: 'ShipmentCtrl',
         resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'erpLynCargoApp',
-              files: ['scripts/controllers/shipment.js']
-            })
+          quotations: function(Quotation){
+            return new Quotation().find();
+          },
+          clients : function(Client){
+            return new Client().find();
+          },
+          currencies: function (Util){
+            return new Util().getApiData('CURRENCY');
+          },
+          agents : function(Agent){
+            return new Agent().find();
+          },
+          markets : function(Util){
+            return new Util().getApiData('COUNTRY');
+          },
+          loadingPorts : function(Util){
+            return new Util().getApiData('PORT');
+          },
+          dischargePorts : function(Util){
+            return new Util().getApiData('PORT');
           }
         }
     })
     .state('dashboard.quote',{
-        templateUrl:'views/pages/quote.html',
-        url:'/quote',
-        controller: 'QuoteCtrl',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'erpLynCargoApp',
-              files: ['scripts/controllers/quote.js']
-            })
-          }
+      templateUrl:'views/pages/quote.html',
+      url:'/quote',
+      controller: 'QuoteCtrl',
+      resolve: {
+        clients : function(Client){
+          return new Client().find();
+        },
+        currencies: function (Util){
+          return new Util().getApiData('CURRENCY');
+        },
+        loadingPorts : function(Util){
+          return new Util().getApiData('PORT');
+        },
+        dischargePorts : function(Util){
+          return new Util().getApiData('PORT');
         }
-    })
+    }})
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
@@ -220,22 +217,7 @@ angular
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',
         url:'/chart',
-        controller:'ChartCtrl',
-        resolve: {
-          loadMyFile:function($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name:'chart.js',
-              files:[
-                'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                'bower_components/angular-chart.js/dist/angular-chart.css'
-              ]
-            }),
-            $ocLazyLoad.load({
-                name:'erpLynCargoApp',
-                files:['scripts/controllers/chartContoller.js']
-            })
-          }
-        }
+        controller:'ChartCtrl'
     })
       .state('dashboard.table',{
         templateUrl:'views/table.html',
@@ -266,5 +248,3 @@ angular
        url:'/grid'
    })
   }]);
-
-    

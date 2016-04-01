@@ -6,7 +6,7 @@ var Data = require('./data');
 // Class constructor
 function Item (db) {
     this.db = db;
-    
+
     //Database Schema
     this.schema = {
         "id": "/Item",
@@ -17,7 +17,7 @@ function Item (db) {
                 "required": true
             },
             "name": {
-                "type": "number",
+                "type": "string",
                 "required": true
             },
             "itemType": {
@@ -25,7 +25,7 @@ function Item (db) {
                 "required": true
             },
             "price": {
-                "type": "object",
+                "type": "number",
                 "required": true
             }
         }

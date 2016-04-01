@@ -1,100 +1,127 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">Facturaci&oacute;n de Proveedores</h1>
+		<div class="page-header">
+			<h1>Facturaci&oacute;n de Proveedores</h1>
+			<div class="pull-right btn-container">
+					<toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
+					<button class="btn btn-default" ng-click="goBack()">
+						<i class="fa fa-arrow-left"></i>
+						Regresar
+					</button>
+					<button class="btn btn-primary" type="submit" form="billForm">
+						<i class="fa fa-save"></i>
+						Guardar
+					</button>
+			</div>
 		</div>
 	</div>
 	
 	<div class="row">
-		<fieldset>
-			<div class="col-lg-12">
-				<div class="col-lg-4">
-					<div class="from-group">
-						<label>Proveedor:</label>
-						<select class="form-control" name="vendor" id="vendor" ng-model="bill.vendor">
-							<option>Se selecciona un proveedor...</option>
-						</select>
-					</div>
-					<br />
-					<div>
-						<div class="well">
-							<p><b>Fulano de Tal</b></p>
-							<p><i class="fa fa-user"> 001-1234567-0 </i></p>
-							<p><i class="fa fa-phone"> 809-111-1111 </i></p>
-							<p><i class="fa fa-home"> Calle A No. 27, Santo Domingo </i></p>
+		<form class="form-horizontal" role="form" name="billForm" id="billForm" ng-submit="saveBill(billForm)" novalidate>
+			<fieldset>
+				<div class="col-lg-12">
+					<div class="col-lg-4">
+						<div class="from-group">
+							<label>Proveedor:</label>
+							<div ng-class="{'has-error': billForm.vendor.$invalid && billForm.$submitted}">
+								<select class="form-control" name="vendor" id="vendor" ng-model="bill.entity" ng-options="i.firstName for i in providers track by i._id" required>
+								</select>
+								<p ng-show="billForm.vendor.$invalid && billForm.$submitted" class="help-block">Este campo es requerido.</p>
+							</div>
+						</div>
+						<br />
+						<div>
+							<div class="well">
+								<p><b>Fulano de Tal</b></p>
+								<p><i class="fa fa-user"> 001-1234567-0 </i></p>
+								<p><i class="fa fa-phone"> 809-111-1111 </i></p>
+								<p><i class="fa fa-home"> Calle A No. 27, Santo Domingo </i></p>
+							</div>
 						</div>
 					</div>
+					<!--Little Force-->
+					<div class="col-lg-4">
+					</div>
+					<!--End of Little Force ;) -->
+					<div class="col-lg-4">
+						<div class="from-group">
+							<label>N&uacute;mero de Factura:</label>
+							<span class="badge">00000001</span>
+						</div>
+						<div class="from-group">
+							<label>NCF:</label>
+							<span class="badge">A9832098504598340</span>
+						</div>
+						<div class="from-group">
+							<label>Cuenta:</label>
+							<div ng-class="{'has-error': billForm.account.$invalid && billForm.$submitted}">
+								<select class="form-control" name="account" id="account" ng-model="bill.account" ng-options="i.name for i in accounts track by i._id" required>
+								<p ng-show="billForm.account.$invalid && billForm.$submitted" class="help-block">Este campo es requerido.</p> 
+								</select>
+							</div>
+						</div>
+						<div class="from-group">
+							<label>Fecha de Emisi&oacute;n:</label>
+							<div ng-class="{'has-error': billForm.entryDate.$invalid && billForm.$submitted}">
+								<input type="date" class="form-control" name="entryDate" id="entryDate" ng-model="bill.entryDate" required>
+								<p ng-show="billForm.entryDate.$invalid && billForm.$submitted" class="help-block">Este campo es requerido.</p>
+							</div>
+						</div>
+						<div class="from-group">
+							<label>Fecha de Vencimiento:</label>
+							<div ng-class="{'has-error': billForm.dueDate.$invalid && billForm.$submitted}">
+								<input type="date" class="form-control" name="dueDate" id="dueDate" ng-model="bill.dueDate" required>
+								<p ng-show="billForm.dueDate.$invalid && billForm.$submitted" class="help-block">Este campo es requerido.</p>
+							</div>
+						</div>
+						<div class="from-group">
+							<label>Forma de Pago:</label>
+							<div ng-class="{'has-error': billForm.paymentMethod.$invalid && billForm.$submitted}">
+								<select class="form-control" name="paymentMethod" id="paymentMethod" ng-model="bill.paymentMethod" ng-options="i.description for i in paymentMethods track by i._id" required>
+								<p ng-show="billForm.paymentMethod.$invalid && billForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</select>
+							</div>						
+						</div>
+						<div class="from-group">
+							<label>Condici&oacute;n:</label>
+							<div ng-class="{'has-error': billForm.condition.$invalid && billForm.$submitted}">
+								<select class="form-control" name="condition" id="condition" ng-model="bill.condition" ng-options="i.description for i in conditions track by i._id" required>
+								</select>
+								<p ng-show="billForm.condition.$invalid && billForm.$submitted" class="help-block">Este campo es requerido.</p>	
+							</div>					
+						</div>										
+					</div>
 				</div>
-				<!--Little Force-->
-				<div class="col-lg-4">
-				</div>
-				<!--End of Little Force ;) -->
-				<div class="col-lg-4">
-					<div class="from-group">
-						<label>N&uacute;mero de Factura:</label>
-						<span class="badge">00000001</span>
-					</div>
-					<div class="from-group">
-						<label>NCF:</label>
-						<span class="badge">A9832098504598340</span>
-					</div>
-					<div class="from-group">
-						<label>Cuenta:</label>
-						<select class="form-control" name="account" id="account" ng-model="bill.account">
-							<option>Se selecciona una cuenta</option>
-						</select>
-					</div>
-					<div class="from-group">
-						<label>Fecha de Emisi&oacute;n:</label>
-						<input type="date" class="form-control" name="entryDate" id="entryDate" ng-model="bill.entryDate" required>
-					</div>
-					<div class="from-group">
-						<label>Fecha de Vencimiento:</label>
-						<input type="date" class="form-control" name="dueDate" id="dueDate" ng-model="bill.dueDate" required>
-					</div>
-					<div class="from-group">
-						<label>Forma de Pago:</label>
-						<select class="form-control" name="paymentMethod" id="paymentMethod" ng-model="bill.paymentMethod">
-							<option>Se selecciona una cuenta</option>
-						</select>						
-					</div>
-					<div class="from-group">
-						<label>Condici&oacute;n:</label>
-						<select class="form-control" name="condition" id="condition" ng-model="bill.condition">
-							<option>Se selecciona una cuenta</option>
-						</select>						
-					</div>										
-				</div>
-			</div>
-		</fieldset>
-	</div>
-	<br>
-	<div class="row">
-		<div class="table-responsive">
-			<table class="table table-striped table-bordered table-hover">
-				<thead>
-					<tr>
-						<th>Item</th>
-						<th>Precio</th>
-						<th>Impuesto (%)</th>
-						<th>Total</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Flete Mar&iacute;timo</td>
-						<td>$3,000.00</td>
-						<td>-</td>
-						<td>$3,000.00</td>
-					</tr>
-					<!--Esta parte hay que profundizarla mas adelante-->
-					<tr>
-						<td colspan="2" class="borderless"></td>
-						<td>Total Impuesto: $0.00</td>
-						<td>Subtotal:$3,000.00</td>
-					</tr>
-				</tbody>
-			</table>
+			</fieldset>
 		</div>
-	</div>
+		<br>
+		<div class="row">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Item</th>
+							<th>Precio</th>
+							<th>Impuesto (%)</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Flete Mar&iacute;timo</td>
+							<td>$3,000.00</td>
+							<td>-</td>
+							<td>$3,000.00</td>
+						</tr>
+						<!--Esta parte hay que profundizarla mas adelante-->
+						<tr>
+							<td colspan="2" class="borderless"></td>
+							<td>Total Impuesto: $0.00</td>
+							<td>Subtotal:$3,000.00</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</form>
 </div>

@@ -23,7 +23,24 @@ function Account (db) {
             "accountType": {
                 "type": "object",
                 "required": true
+            },
+            "superAccount": {
+                "type": "object",
+                "required": false
+            },
+            "currency": {
+                "type": "object",
+                "required": true
+            },
+            "bankAssociated": {
+                "type": "object",
+                "required": false
+            },
+            "bankAccountNumber": {
+                "type": "number",
+                "required": false
             }
+
         }
     };
 
