@@ -1,0 +1,27 @@
+<div class="container-fluid">
+	<!-- Header -->
+	<div class="row">
+		<div class="page-header">
+			<h2>Nuevo {{title}}</h2>
+		</div>
+	</div>
+
+	<!-- Body -->
+	<div class="row">
+		<form class="form-horizontal" role="form" name="typesForm" id="typesForm" ng-submit="saveType(typesForm)" novalidate>
+			<div class="form-group">
+				<label class="col-xs-4 control-label" for="description">Descripci&oacute;n:</label>
+				<div class="col-xs-6" ng-class="{'has-error': typesForm.description.$invalid && typesForm.$submitted}">
+					<input type="text" class="form-control" name="description" id="description" ng-model="type.description" required>
+					<p ng-show="typesForm.description.$invalid && typesForm.$submitted" class="help-block">Este campo es requerido.</p>
+				</div>
+			</div>
+		</form>
+		<br>
+		<hr>
+		<div class="btn-container pull-right">
+			<button class="btn btn-default" ng-click="cancel()">Cancelar</button>
+			<button class="btn btn-primary" type="submit" form="typesForm">Guardar</button>
+		</div>
+	</div>
+</div>

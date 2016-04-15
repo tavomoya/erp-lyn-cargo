@@ -18,7 +18,8 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
     'toaster',
-    'ui.mask'
+    'ui.mask',
+    'ngDialog'
   ])
   .config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
 
@@ -210,6 +211,16 @@ angular
           return new Util().getApiData('PORT');
         }
     }})
+    .state('dashboard.itemType',{
+      templateUrl:'views/pages/itemType.html',
+      url:'/itemType',
+      controller: 'ItemTypeCtrl',
+    })
+    .state('dashboard.accountType',{
+      templateUrl:'views/pages/accountType.html',
+      url:'/accountType',
+      controller: 'AccountTypeCtrl',
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
