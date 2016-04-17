@@ -8,7 +8,7 @@
 
 	<!-- Body -->
 	<div class="row">
-		<form class="form-horizontal" role="form" name="bankNPortForm" id="bankNPortForm" ng-submit="saveType()" novalidate>
+		<form class="form-horizontal" role="form" name="bankNPortForm" id="bankNPortForm" ng-submit="savebp(bankNPortForm)" novalidate>
 			<div class="form-group">
 				<label class="col-xs-4 control-label" for="name">Nombre:</label>
 				<div class="col-xs-6" ng-class="{'has-error': bankNPortForm.name.$invalid && bankNPortForm.$submitted}">
@@ -20,7 +20,6 @@
 				<label class="col-xs-4 control-label" for="country">Pa&iacute;s:</label>
 				<div class="col-xs-6" ng-class="{'has-error': bankNPortForm.country.$invalid && bankNPortForm.$submitted}">
 					<select class="form-control" name="country" id="country" ng-model="bp.country" ng-options="c.cioc as c.cioc for c in countries" required></select>
-					<input type="text" class="form-control" >
 					<p ng-show="bankNPortForm.country.$invalid && bankNPortForm.$submitted" class="help-block">Este campo es requerido.</p>
 				</div>
 			</div>

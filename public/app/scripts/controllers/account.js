@@ -6,9 +6,9 @@ app.controller('AccountCtrl', function ($scope, $state, Account, currencies, acc
   
   $scope.account = new Account();
   $scope.currencies = currencies.data;
-  $scope.accountTypes = accountTypes.data;
-  $scope.banks = banks.data;
-  $scope.superAccounts = superAccounts.data;
+  $scope.accountTypes = accountTypes;
+  $scope.banks = banks;
+  $scope.superAccounts = superAccounts;
   //$scope.accountType = accountType.data;
   //console.log(accountType);
 

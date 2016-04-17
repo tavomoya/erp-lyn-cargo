@@ -30,19 +30,23 @@ app.factory('Data', function ($http, $q, $rootScope) {
 		function params:
 			*params type 'object'
 	*/
-	Data.prototype.find = function(params) {
+	Data.prototype.find = function(query, options) {
 		var deferred = $q.defer();
 		var _this = this.constructor;
 
-		if (!params) {
-			params = {};
+		if (!query) {
+			query = {};
 		};
 
-		$http.post(this.apiPath + '/find', params)
+		$http.post(this.apiPath + '/find', 
+		{
+			obj: query, 
+			opts: options
+		})
 		.then(function (res) {
 			var _res;
-			if (Array.isArray(res)) {
-				_res = res.map(function (obj) {
+			if (Array.isArray(res.data)) {
+				_res = res.data.map(function (obj) {
 					return new _this(obj);
 				});
 			} else {
@@ -52,7 +56,7 @@ app.factory('Data', function ($http, $q, $rootScope) {
 			deferred.resolve(_res);
  		}, function (err) {
  			deferred.reject(err);
- 		})
+ 		});
 
 		return deferred.promise;
 	};
@@ -102,7 +106,7 @@ app.factory('Data', function ($http, $q, $rootScope) {
 	Data.prototype.save = function(object) {
 		var deferred = $q.defer();
 		var _this = this;
-
+		var _constructor = _this.constructor;
 		if (!object) {
 			object = _this.getData();
 		}
@@ -110,6 +114,13 @@ app.factory('Data', function ($http, $q, $rootScope) {
 		if (!_this._id) {
 			$http.post(_this.apiPath, {obj: object})
 			.then(function (res) {
+				if (Array.isArray(res.data)) {
+					res.data = res.data.map(function (obj) {
+						return new _constructor(obj);
+					});
+				} else {
+					res = new _constructor(res);
+				};
 				deferred.resolve(res);
 			}, function (err) {
 				deferred.reject(err);

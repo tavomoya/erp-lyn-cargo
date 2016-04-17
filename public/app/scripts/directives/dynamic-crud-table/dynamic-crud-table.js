@@ -12,18 +12,26 @@ angular.module('erpLynCargoApp')
 				title: '=',
 				headers: '='
 			},
-			controller: function ($scope, AccountType, ItemType, ShipmentType, ngDialog, toaster) {
+			controller: function ($scope, AccountType, ItemType, Port, ngDialog, toaster, Bank) {
 
 				$scope.content = [];
+				$scope.totalPages = 0;
+				$scope.currentPage = 1;
+				$scope.params = {
+					limit: 10,
+					skip: 0
+				};
 
 				$scope.modelToUse = $scope.model === 'AccountType' ? new AccountType()
 					: $scope.model === 'ItemType' ? new ItemType()
-						: new ShipmentType();
+						: $scope.model === 'Bank' ? new Bank()
+							: new Port();
 
-				$scope.getContent = function () {
-					$scope.modelToUse.find()
+				$scope.getContent = function (params) {
+					
+					$scope.modelToUse.find({}, params)
 					.then(function (res) {
-						$scope.content = res.data;
+						$scope.content = res;
 					})
 					.catch(function (err) {
 						console.log('There was an error fetching content', err);
@@ -38,16 +46,36 @@ angular.module('erpLynCargoApp')
 							controller: 'TypeCtrl',
 							scope: $scope,
 							resolve: {
-								content: {};
+								content: function () {
+									return {};
+								}
 							}
 						})
 						.closePromise.then(function (res) {
-							$scope.content.push(res.value)
-							toaster.pop('success', $scope.title + ' Guardado', 'El '+ $scope.title+ ' se ha guardado satisfactorimente');
+							if (res.value._id) {
+								$scope.content.push(res.value)
+								toaster.pop('success', $scope.title + ' Guardado', 'El '+ $scope.title+ ' se ha guardado satisfactorimente');	
+							};
 						});
 					} else {
 						ngDialog.open({
-							template: 'views/dialogs/banknPorts.html'
+							template: 'views/dialogs/banknPorts.html',
+							controller: 'BanknPortCtrl',
+							scope: $scope,
+							resolve: {
+								content: function () {
+									return {};
+								},
+								countries: function (Util) {
+									return new Util().getApiData('COUNTRY');
+								}
+							}
+						})
+						.closePromise.then(function (res) {
+							if (res.value._id) {
+								$scope.content.push(res.value)
+								toaster.pop('success', $scope.title + ' Guardado', 'El '+ $scope.title+ ' se ha guardado satisfactorimente');	
+							};
 						});
 					}
 				};
@@ -60,23 +88,70 @@ angular.module('erpLynCargoApp')
 							controller: 'TypeCtrl',
 							scope: $scope,
 							resolve: {
-								content: _content
+								content: function () {
+									return _content;
+								}
 							}
 						})
 						.closePromise.then(function (res) {
-							$scope.content.push(res.value)
-							toaster.pop('success', $scope.title + ' Guardado', 'El '+ $scope.title+ ' se ha guardado satisfactorimente');
+							if (typeof res.value === 'object')
+								toaster.pop('success', $scope.title + ' Actualizado', 'El '+ $scope.title+ ' se ha actualizado satisfactorimente');
 						});
 					} else {
 						ngDialog.open({
-							template: 'views/dialogs/banknPorts.html'
+							template: 'views/dialogs/banknPorts.html',
+							controller: 'BanknPortCtrl',
+							scope: $scope,
+							resolve: {
+								content: function () {
+									return _content;
+								},
+								countries: function (Util) {
+									return new Util().getApiData('COUNTRY');
+								}
+							}
+						})
+						.closePromise.then(function (res) {
+							if (typeof res.value === 'object')
+								toaster.pop('success', $scope.title + ' Actualizado', 'El '+ $scope.title+ ' se ha actualizado satisfactorimente');
 						});
 					}
-				}
+				};
+				
+				$scope.prevPageDisabled = function () {
+					return $scope.currentPage === 1 ? "disabled" : "";
+				};
+
+				$scope.nextPageDisabled = function () {
+					return $scope.currentPage === $scope.totalPages ? "disabled" : "";
+				};
+				
+				$scope.prevPage = function () {
+					if ($scope.currentPage > 1) {
+						$scope.currentPage--;
+						$scope.params.skip = (($scope.currentPage - 1) * $scope.params.limit);
+						$scope.getContent($scope.params);
+					}
+				};
+
+				$scope.nextPage = function () {
+					if ($scope.currentPage < $scope.totalPages) {
+						$scope.currentPage++;
+						$scope.params.skip = (($scope.currentPage - 1) * $scope.params.limit);
+						$scope.getContent($scope.params);
+					}
+				};
 
 				// On Load
-				$scope.getContent();
-
+				$scope.modelToUse.count()
+				.then(function (res) {
+					var count = res.data.data;
+					$scope.totalPages = count < $scope.params.limit ? 1 : Math.ceil(count / $scope.params.limit);
+					$scope.getContent($scope.params);					
+				})
+				.catch(function (err) {
+					console.log('error', err);
+				});
 			}
 		}
 	});

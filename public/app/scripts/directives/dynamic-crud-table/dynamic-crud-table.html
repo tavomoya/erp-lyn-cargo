@@ -40,6 +40,15 @@
             </tr>
           </tbody>
 				</table>
+				<div style="text-align: center;">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default disabled" ng-class="prevPageDisabled()" ng-click="prevPage()"><i class="fa fa-angle-double-left"></i>
+						</button>
+						<button type="button" class="btn btn-default ng-binding" disabled="">{{currentPage}}/{{totalPages}}</button>
+						<button type="button" class="btn btn-default" ng-class="nextPageDisabled()" ng-click="nextPage()"><i class="fa fa-angle-double-right"></i>
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
