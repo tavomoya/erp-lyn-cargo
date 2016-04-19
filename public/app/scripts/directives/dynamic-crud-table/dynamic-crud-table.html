@@ -20,7 +20,7 @@
 	<div class="col-lg-6">
 		<div class="form-group">
 			<label class="control-label">B&uacute;squeda:</label>
-			<input type="text" class="form-control" name="search" id="search" ng-model="search">
+			<input type="text" class="form-control" name="search" id="search" ng-model="find" ng-keyup="$event.keyCode == 13 ? search(find) : null">
 		</div>
 		<div>
 			<div class="table-responsive">

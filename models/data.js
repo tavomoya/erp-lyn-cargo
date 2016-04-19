@@ -75,6 +75,25 @@ function dateParser (object) {
 Data.prototype.find = function(query, options) {
 	var deferred = q.defer();
 	var query = (typeof query === 'string') ? JSON.parse(query) : query;
+	
+	// If you need to filter by many fields
+	if (options.search && options.fields) {
+		query.$or = [];
+		options.fields.forEach(function (elem) {
+			var _field = {};
+			if (isNaN(options.search)) {
+				_field[elem] = {
+					$regex: options.search,
+					$options: 'i'
+				}
+			} else {
+				_field[elem] = parseFloat(options.search);
+			};
+			
+			query.$or.push(_field);
+		});
+	}
+	
 	var fnToUse = (options) ? 
 		this.collection.find(query).skip(options.skip).limit(options.limit)
 			: this.collection.find(query);
@@ -139,9 +158,27 @@ Data.prototype.delete = function(query) {
 
 Data.prototype.count = function(query, options) {
 	var deferred = q.defer();
-	var _options = (!options) ? {} : options;
+	var query = (!query) ? {} : query;
+	
+	// If you need to filter by many fields
+	if (options.search && options.fields) {
+		query.$or = [];
+		options.fields.forEach(function (elem) {
+			var _field = {};
+			if (isNaN(options.search)) {
+				_field[elem] = {
+					$regex: options.search,
+					$options: 'i'
+				}
+			} else {
+				_field[elem] = parseFloat(options.search);
+			};
+			
+			query.$or.push(_field);
+		});
+	};
 
-	this.collection.count(query, _options,
+	this.collection.count(query, {},
 		handleResponse(deferred));
 
 	return deferred.promise;

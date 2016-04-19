@@ -19,7 +19,9 @@ angular.module('erpLynCargoApp')
 				$scope.currentPage = 1;
 				$scope.params = {
 					limit: 10,
-					skip: 0
+					skip: 0,
+					search: '',
+					fields: $scope.fields
 				};
 
 				$scope.modelToUse = $scope.model === 'AccountType' ? new AccountType()
@@ -140,6 +142,20 @@ angular.module('erpLynCargoApp')
 						$scope.params.skip = (($scope.currentPage - 1) * $scope.params.limit);
 						$scope.getContent($scope.params);
 					}
+				};
+				
+				$scope.search = function (_string) {
+					$scope.params.search = _string;
+					console.log('hola :) ', $scope.params, _string)
+					$scope.modelToUse.count(null, $scope.params)
+					.then(function (res) {
+						var count = res.data.data;
+						$scope.totalPages = count < $scope.params.limit ? 1 : Math.ceil(count / $scope.params.limit);
+						$scope.getContent($scope.params);					
+					})
+					.catch(function (err) {
+						console.log('error', err);
+					});
 				};
 
 				// On Load
