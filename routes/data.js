@@ -8,7 +8,7 @@ module.exports = function (prefix, app, reference) {
 	var error = util.error;
 
     app.post(prefix + '/find', function (req, res) {
-        new reference(app.db).data.find(req.body.obj)
+        new reference(app.db).data.find(req.body.obj, req.body.opts)
         .then(success(res), error(res));
     });
 

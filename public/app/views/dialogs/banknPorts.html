@@ -1,0 +1,41 @@
+<div class="container-fluid">
+	<!-- Header -->
+	<div class="row">
+		<div class="page-header">
+			<h2>Nuevo {{title}}</h2>
+		</div>
+	</div>
+
+	<!-- Body -->
+	<div class="row">
+		<form class="form-horizontal" role="form" name="bankNPortForm" id="bankNPortForm" ng-submit="savebp(bankNPortForm)" novalidate>
+			<div class="form-group">
+				<label class="col-xs-4 control-label" for="name">Nombre:</label>
+				<div class="col-xs-6" ng-class="{'has-error': bankNPortForm.name.$invalid && bankNPortForm.$submitted}">
+					<input type="text" class="form-control" name="name" id="name" ng-model="bp.name" required>
+					<p ng-show="bankNPortForm.name.$invalid && bankNPortForm.$submitted" class="help-block">Este campo es requerido.</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="title === 'Puerto'">
+				<label class="col-xs-4 control-label" for="country">Pa&iacute;s:</label>
+				<div class="col-xs-6" ng-class="{'has-error': bankNPortForm.country.$invalid && bankNPortForm.$submitted}">
+					<select class="form-control" name="country" id="country" ng-model="bp.country" ng-options="c.cioc as c.cioc for c in countries" required></select>
+					<p ng-show="bankNPortForm.country.$invalid && bankNPortForm.$submitted" class="help-block">Este campo es requerido.</p>
+				</div>
+			</div>
+			<div class="form-group" ng-if="title === 'Puerto'">
+				<label class="col-xs-4 control-label" for="type">Tipo:</label>
+				<div class="col-xs-6" ng-class="{'has-error': bankNPortForm.type.$invalid && bankNPortForm.$submitted}">
+					<select class="form-control" name="type" id="type" ng-model="bp.type" ng-options="t for t in types" required></select>
+					<p ng-show="bankNPortForm.type.$invalid && bankNPortForm.$submitted" class="help-block">Este campo es requerido.</p>
+				</div>
+			</div>
+		</form>
+		<br>
+		<hr>
+		<div class="btn-container pull-right">
+			<button class="btn btn-default" ng-click="cancel()">Cancelar</button>
+			<button class="btn btn-primary" type="submit" form="bankNPortForm">Guardar</button>
+		</div>
+	</div>
+</div>

@@ -79,6 +79,26 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+            <!-- Configuracion -->
+            <li ng-class="{active:collapseVar==5}">
+                <a href="" ng-click="check(5)"><i class="fa fa-gear fa-fw"></i> Configuraci&oacute;n <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=5">       
+                    <li>
+                        <a ui-sref="dashboard.accountType" ng-click="selectedMenu='accountType'">Tipo de Cuenta</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.itemType" ng-click="selectedMenu='itemType'">Tipo de Item</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.bank" ng-click="selectedMenu='bank'">Banco</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.port" ng-click="selectedMenu='port'">Puerto</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

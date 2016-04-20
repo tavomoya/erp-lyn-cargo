@@ -6,7 +6,7 @@ app.controller('QuoteCtrl', function($scope, $state, Quotation, clients, currenc
 	$scope.activeTab = 1;
 
 	$scope.quote = new Quotation();
-	$scope.client = clients.data;
+	$scope.client = clients;
 	$scope.currency = currencies.data;
 	$scope.loadingPort = loadingPorts.data;
 	$scope.dischargePort = dischargePorts.data;
