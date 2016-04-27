@@ -108,6 +108,7 @@ d.run(function () {
 	require('./routes/account')('/account', app);
 	require('./routes/accountType')('/accountType', app);
 	require('./routes/agent')('/agent', app);
+	require('./routes/bank')('/bank', app);
 	require('./routes/client')('/client', app);
 	require('./routes/document')('/document', app);
 	require('./routes/employee')('/employee', app);
@@ -115,6 +116,7 @@ d.run(function () {
 	require('./routes/item')('/item', app);
 	require('./routes/itemType')('/itemType', app);
   require('./routes/payroll')('/payroll', app);
+  require('./routes/port')('/port', app);
   require('./routes/quotation')('/quotation', app);
   require('./routes/shipment')('/shipment', app);
   require('./routes/shipmentType')('/shipmentType', app);

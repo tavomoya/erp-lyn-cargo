@@ -6,11 +6,11 @@ app.controller('ShipmentCtrl', function($scope, $state, Shipment, quotations, cl
 	$scope.activeTab = 1;
 
 	$scope.shipment = new Shipment();
-	$scope.quotation = quotations.data;
-	$scope.client = clients.data;
+	$scope.quotation = quotations;
+	$scope.client = clients;
 	$scope.currency = currencies.data;
-	$scope.agent = agents.data;
-	$scope.market = markets.data;
+	$scope.agent = agents;
+	$scope.market = markets;
 	$scope.loadingPort = loadingPorts.data;
 	$scope.dischargePort = dischargePorts.data;
 

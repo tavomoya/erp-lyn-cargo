@@ -18,7 +18,8 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
     'toaster',
-    'ui.mask'
+    'ui.mask',
+    'ngDialog'
   ])
   .config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
 
@@ -88,6 +89,9 @@ angular
         resolve: {
           itemTypes: function (ItemType) {
             return new ItemType().find();
+          }, 
+          accounts: function (Account) {
+            return new Account().find();
           }
         }
     })
@@ -126,6 +130,9 @@ angular
           },
           conditions: function(Util){
             return new Util().getApiData('CONDITION');
+          }, 
+          items: function (Item) {
+            return new Item().find();
           }
         }
     })
@@ -210,6 +217,26 @@ angular
           return new Util().getApiData('PORT');
         }
     }})
+    .state('dashboard.itemType',{
+      templateUrl:'views/pages/itemType.html',
+      url:'/itemType',
+      controller: 'ItemTypeCtrl',
+    })
+    .state('dashboard.accountType',{
+      templateUrl:'views/pages/accountType.html',
+      url:'/accountType',
+      controller: 'AccountTypeCtrl',
+    })
+    .state('dashboard.bank',{
+      templateUrl:'views/pages/bank.html',
+      url:'/bank',
+      controller: 'BankCtrl',
+    })
+    .state('dashboard.port',{
+      templateUrl:'views/pages/port.html',
+      url:'/port',
+      controller: 'PortCtrl',
+    })
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login'
