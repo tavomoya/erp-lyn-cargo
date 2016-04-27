@@ -2,6 +2,7 @@
 
 var q = require('q');
 var Data = require('./data');
+var AccountEntry = require('./accountEntry');
 
 // Class constructor
 function Document (db) {
@@ -13,8 +14,7 @@ function Document (db) {
         "type": "object",
         "properties": {
             "entity": {
-                "type": "object",
-                "required": true
+                "type": "object"
             },
             "status": {
                 "type": "number",
@@ -47,28 +47,35 @@ function Document (db) {
             "dueDate": {
                 "type": "date",
                 "required": true
-            },
-            "paymentMethod": {
-                "type": "object",
-                "required": true
-            },
-            "condition": {
-                "type": "object",
-                "required": true
-            },
-
+            }
         }
     };
 
     this.data = new Data(db, 'DOCUMENT', this.schema);
+    this.accountEntry = new AccountEntry(db);
 };
 
-//This is a test function
-Document.prototype.test = function () {
+Document.prototype.insert = function (_document) {
     var deferred = q.defer();
-    deferred.resolve(':)');
+    var _this = this;
+    
+    this.data.insert(_document)
+    .then(function (res) {
+        return _this.accountEntry.invoiceAccountEntries(res[0]);
+    })
+    .then(function (obj) {
+        deferred.resolve(obj);
+    })
+    .fail(function (err) {
+        console.log(err);
+        deferred.reject({
+            error: err,
+            message: 'There was an error saving the invoice'
+        });
+    });
+    
     return deferred.promise;
-}
+};
 
 // Make the class visible
 module.exports = Document;
