@@ -24,7 +24,7 @@
 						<div class="from-group">
 							<label>Cliente:</label>
 							<div ng-class="{'has-error': invoiceForm.client.$invalid && invoiceForm.$submitted}">
-								<select class="form-control" name="client" id="client" ng-model="invoice.entity" ng-options="i.firstName for i in clients track by i._id" >
+								<select class="form-control" name="client" id="client" ng-model="invoice.entity" ng-options="i.fullName for i in clients | fullname: clients" >
 								</select>
 								<p ng-show="invoiceForm.vendor.$invalid && invoiceForm.$submitted" class="help-block">Este campo es requerido.</p>
 							</div>
@@ -32,10 +32,10 @@
 						<br />
 						<div>
 							<div class="well">
-								<p><b>Fulano de Tal</b></p>
-								<p><i class="fa fa-user"> 001-1234567-0 </i></p>
-								<p><i class="fa fa-phone"> 809-111-1111 </i></p>
-								<p><i class="fa fa-home"> Calle A No. 27, Santo Domingo </i></p>
+								<p><b>{{invoice.entity | fullname}}</b></p>
+								<p><i class="fa fa-user"> {{invoice.entity.documentNumber}}</i></p>
+								<p><i class="fa fa-phone"> {{invoice.entity.phone}} </i></p>
+								<p><i class="fa fa-home"> {{invoice.entity.address | fulladdress}} </i></p>
 							</div>
 						</div>
 					</div>
@@ -44,11 +44,11 @@
 					</div>
 					<!--End of Little Force ;) -->
 					<div class="col-lg-4">
-						<div class="from-group">
+						<div class="from-group" ng-hide="true">
 							<label>N&uacute;mero de Factura:</label>
 							<span class="badge">00000001</span>
 						</div>
-						<div class="from-group">
+						<div class="from-group" ng-hide="true">
 							<label>NCF:</label>
 							<span class="badge">A9832098504598340</span>
 						</div>
@@ -100,27 +100,39 @@
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>Item</th>
-							<th>Precio</th>
-							<th>Impuesto (%)</th>
-							<th>Total</th>
+							<th class="col-xs-1">Acciones</th>
+							<th class="col-xs-2">Item</th>
+							<th class="col-xs-2">Precio</th>
+							<th class="col-xs-2">Impuestos</th>
+							<th class="col-xs-2">Total</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Flete Mar&iacute;timo</td>
-							<td>$3,000.00</td>
-							<td>-</td>
-							<td>$3,000.00</td>
+						<tr ng-repeat="d in invoice.detail" ng-mouseover="hovering=true" ng-mouseleave="hovering=false">
+							<td>
+								<button class="btn btn-danger" uib-tooltip="Eliminar Fila" ng-click="removeRow($index)" ng-show="hovering">
+									<i class="fa fa-times"></i>
+								</button>
+								<button class="btn btn-success" uib-tooltip="Aplicar Impuesto" ng-click="d.taxEnable = !d.taxEnable; setTax(d.taxEnable, $index)" ng-disabled="!d.item" ng-show="hovering">
+									<i class="fa fa-percent"></i>
+								</button>
+							</td>
+							<td><select class="document-inputs" ng-model="d.item" ng-options="item.name for item in items"></select></td>
+							<td><input class="document-inputs" type="number" ng-model="d.item.price"></td>
+							<td>{{d.taxAmount | currency}}</td>
+							<td>{{d.amount = d.taxAmount + d.item.price | currency}}</td>
 						</tr>
 						<!--Esta parte hay que profundizarla mas adelante-->
 						<tr>
-							<td colspan="2" class="borderless"></td>
-							<td>Total Impuesto: $0.00</td>
-							<td>Subtotal:$3,000.00</td>
+							<td colspan="3" class="borderless"></td>
+							<td style="background-color: gainsboro;">Total Impuesto: $0.00</td>
+							<td style="background-color: gainsboro;">Total: {{invoice.amount | currency}}</td>
 						</tr>
 					</tbody>
 				</table>
+				<button class="btn btn-default" ng-click="addRow()">
+					<i class="fa fa-plus"> Agregar Fila</i>
+				</button>
 			</div>
 		</div>
 	</form>
