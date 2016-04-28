@@ -208,6 +208,9 @@ angular
         },
         dischargePorts : function(Util){
           return new Util().getApiData('PORT');
+        },
+        items : function(Item){
+          return new Item().find();
         }
     }})
       .state('login',{

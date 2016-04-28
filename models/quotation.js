@@ -75,7 +75,11 @@ function Quotation (db) {
             "landingDate": {
                 "type": "date",
                 "required": true
-            }
+            },
+            "salesTerm": {
+                "type": "string",
+                "required": true
+            }             
         }
     };
 

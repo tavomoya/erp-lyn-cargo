@@ -23,17 +23,18 @@
 			</li>
 			<li ng-class="{'active': activeTab == 2}"><a ng-click="activeTab = 2" data-toggle="tab">Items</a>
 			</li>
-		</ul>		
+		</ul>	
+		<form class="form-horizontal" role="form" name="quoteForm" id="quoteForm" ng-submit="saveQuote(quoteForm)" novalidate>	
 		<div class="tab-content">
 			<div class="tab-pane active">
 				<div ng-if="activeTab == 1">
 					<br>
-					<form class="form-horizontal" role="form" name="quoteForm" id="quoteForm" ng-submit="saveQuote(quoteForm)" novalidate>
+					<!--<form class="form-horizontal" role="form" name="quoteForm" id="quoteForm" ng-submit="saveQuote(quoteForm)" novalidate>-->
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Cliente:</label>
 							<div ng-class="{'has-error': quoteForm.client.$invalid && quoteForm.$submitted}">
 								<div class="col-xs-4"> 
-									<select class="form-control" name="client" id="client" ng-model="quote.client" ng-options="i.firstName for i in client track by i._id" required>
+									<select class="form-control" name="client" id="client" ng-model="quote.client" ng-options="(i.firstName+' '+i.lastName) for i in client track by i._id" required>
 									</select>	
 									<p ng-show="quoteForm.client.$invalid && quoteForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div> 
@@ -52,7 +53,7 @@
 							<label class="col-xs-2 control-label">Moneda:</label>
 							<div ng-class="{'has-error': quoteForm.currency.$invalid && quoteForm.$submitted}">
 								<div class="col-xs-4">
-									<select class="form-control" name="currency" id="currency" ng-model="quote.currency" ng-options="i.cc for i in currency track by i._id" required>
+									<select class="form-control" name="currency" id="currency" ng-model="quote.currency" ng-options="(i.cc+' - '+i.name) for i in currency track by i._id" required>
 									</select>
 									<p ng-show="quoteForm.currency.$invalid && quoteForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
@@ -75,6 +76,15 @@
 									<select class="form-control" name="dischargePort" id="dischargePort" ng-model="quote.dischargePort" ng-options="i.description for i in dischargePort track by i._id" required>
 									</select>
 									<p ng-show="quoteForm.dischargePort.$invalid && quoteForm.$submitted" class="help-block">Este campo es requerido.</p>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Termino(s):</label>
+							<div ng-class="{'has-error': quoteForm.salesTerm.$invalid && quoteForm.$submitted}">
+								<div class="col-xs-4">
+									<input type="text" class="form-control" name="salesTerm" id="salesTerm" ng-model="quote.salesTerm" required>
+									<p ng-show="quoteForm.salesTerm.$invalid && quoteForm.$submitted" class="help-block">Este campo es requerido.</p>
 								</div>
 							</div>
 						</div>
@@ -102,7 +112,7 @@
 								</div>
 							</div>
 						</div>
-					</form>
+					<!--</form> -->
 				</div>
 				<div ng-if="activeTab == 2">
 					<br>
@@ -111,6 +121,7 @@
 								<table class="table table-striped table-bordered table-hover">
 									<thead>
 										<tr>
+											<th></th>
 											<th>Item</th>
 											<th>Precio</th>
 											<th>Impuesto (%)</th>
@@ -118,9 +129,18 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>Flete Mar&iacute;timo</td>
-											<td>$3,000.00</td>
+										<tr ng-repeat="detail in quote">
+											<td class="delete" ng-click="borrarItem(item)">
+												<span ng-show="hover">
+													<i class="fa fa-times"></i>
+												</span>
+											</td>
+											<td class="editable">
+												<select class="table-editable-select" ng-model="detail.item" ng-options="items.name for items in item track by items._id "></select>
+											</td>
+											<td class="editable">
+												<input type="text" ng-model="detail.item.price" value="detail.item.price">
+											</td>
 											<td>-</td>
 											<td>$3,000.00</td>
 										</tr>
@@ -140,5 +160,6 @@
 				</div>	
 			</div>	
 		</div>
+	</form>
 	</div>
 </div>
