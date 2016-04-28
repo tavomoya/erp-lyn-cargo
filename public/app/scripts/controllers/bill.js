@@ -5,10 +5,10 @@ var app = angular.module('erpLynCargoApp');
 app.controller('BillCtrl', function ($scope, $state, Document, providers, accounts, paymentMethods, conditions, toaster) {
   
   $scope.bill = new Document();
-  $scope.providers = providers.data;
-  $scope.accounts = accounts.data;
+  $scope.providers = providers;
+  $scope.accounts = accounts;
   $scope.paymentMethods = paymentMethods.data;
-  $scope.conditions = conditions.data
+  $scope.conditions = conditions.data;
   //console.log(paymentMethodss);
 
   $scope.saveBill = function (form) {
