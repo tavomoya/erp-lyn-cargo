@@ -89,6 +89,9 @@ angular
         resolve: {
           itemTypes: function (ItemType) {
             return new ItemType().find();
+          }, 
+          accounts: function (Account) {
+            return new Account().find();
           }
         }
     })
@@ -127,6 +130,9 @@ angular
           },
           conditions: function(Util){
             return new Util().getApiData('CONDITION');
+          }, 
+          items: function (Item) {
+            return new Item().find();
           }
         }
     })

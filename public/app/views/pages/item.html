@@ -36,8 +36,8 @@
 				<label class="col-xs-1 control-label" for="type">Tipo de Item:</label>
 				<div class="col-xs-3" ng-class="{'has-error': itemForm.type.$invalid && itemForm.$submitted}">
 					<select class="form-control" name="type" id="type" ng-model="item.itemType" ng-options="i.description for i in itemTypes track by i._id" required>
-					<p ng-show="itemForm.type.$invalid && itemForm.$submitted" class="help-block">Este campo es requerido.</p>
 					</select>
+					<p ng-show="itemForm.type.$invalid && itemForm.$submitted" class="help-block">Este campo es requerido.</p>					
 				</div>
 			</div>
 			<div class="form-group">
@@ -47,29 +47,14 @@
 					<p ng-show="itemForm.price.$invalid && itemForm.$submitted" class="help-block">Este campo es requerido.</p>
 				</div>
 			</div>
-		</form>
-		<div class="col-lg-6">
-			<div class="table-reponsive">
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>Proceso</th>
-							<th>Cuenta Contable</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								Facturacion
-							</td>
-							<td>
-								CxC Clientes Locales
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<button class="btn btn-default">Agregar <i class="fa fa-plus"></i></button>
+			<div class="form-group">
+				<label class="col-xs-1 control-label" for="account">Cuenta Contable:</label>
+				<div class="col-xs-3" ng-class="{'has-error': itemForm.account.$invalid && itemForm.$submitted}">
+					<select class="form-control" name="account" id="account" ng-model="item.account" ng-options="a.name for a in accounts track by a._id" required>
+					</select>
+					<p ng-show="itemForm.account.$invalid && itemForm.$submitted" class="help-block">Este campo es requerido.</p>					
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>

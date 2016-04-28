@@ -2,10 +2,11 @@
 
 var app = angular.module('erpLynCargoApp');
 
-app.controller('ItemCtrl', function ($scope, $state, Item, itemTypes, toaster) {
+app.controller('ItemCtrl', function ($scope, $state, Item, itemTypes, toaster, accounts) {
   
   $scope.item = new Item();
   $scope.itemTypes = itemTypes;
+  $scope.accounts = accounts;
 
   $scope.saveItem = function (form) {
     if (form.$invalid) {

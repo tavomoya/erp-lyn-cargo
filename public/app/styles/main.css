@@ -82,10 +82,17 @@ text-decoration: none;
 background-color: #eee;
 }
 
-.borderless td, th, tr{
-  border: none;
+.borderless {
+  border-bottom: hidden !important;
+  border-left: hidden !important;
 }
 
 .btn-container {
   margin-top: -45px;
+}
+
+.document-inputs {
+  border: 0px;
+  padding: initial;
+  background-color: transparent; 
 }

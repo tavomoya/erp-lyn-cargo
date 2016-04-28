@@ -77,21 +77,23 @@ Data.prototype.find = function(query, options) {
 	var query = (typeof query === 'string') ? JSON.parse(query) : query;
 	
 	// If you need to filter by many fields
-	if (options.search && options.fields) {
-		query.$or = [];
-		options.fields.forEach(function (elem) {
-			var _field = {};
-			if (isNaN(options.search)) {
-				_field[elem] = {
-					$regex: options.search,
-					$options: 'i'
-				}
-			} else {
-				_field[elem] = parseFloat(options.search);
-			};
-			
-			query.$or.push(_field);
-		});
+	if (options) {
+		if (options.search && options.fields) {
+			query.$or = [];
+			options.fields.forEach(function (elem) {
+				var _field = {};
+				if (isNaN(options.search)) {
+					_field[elem] = {
+						$regex: options.search,
+						$options: 'i'
+					}
+				} else {
+					_field[elem] = parseFloat(options.search);
+				};
+				
+				query.$or.push(_field);
+			});
+		}	
 	}
 	
 	var fnToUse = (options) ? 
