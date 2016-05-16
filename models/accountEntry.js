@@ -69,6 +69,53 @@ AccountEntry.prototype.invoiceAccountEntries = function (_invoice) {
 };
 
 
+//Save AccountEntry for Bills
+AccountEntry.prototype.billAccountEntries = function (_bill) {
+  var deferred = q.defer();
+  var _this = this;
+  var entryPromises = [];
+  
+  // The entry for the account
+  // selected in the invoice 
+  var debitEntry = {
+    debit: {
+      account: _bill.account,
+      amount: _bill.amount
+    },
+    date: new Date(),
+    billID: _bill._id
+  };
+  entryPromises.push(_this.data.insert(debitEntry));
+  
+  for (var i = 0; i < _bill.detail.length; i++) {
+    var creditEntry = {
+      credit: {
+        account: _bill.detail[i].item.account,
+        amount: _bill.detail[i].amount
+      },
+      date: new Date(),
+      billID: _bill._id
+    };
+    
+    entryPromises.push(_this.data.insert(creditEntry));
+  };
+  
+  
+  q.all(entryPromises)
+  .then(function (res) {
+    deferred.resolve(res);
+  })
+  .fail(function (err) {
+    deferred.reject({
+      error: err,
+      message: 'Error trying to save the entries'
+    });
+  });
+  
+  return deferred.promise;
+  
+}
+
 
 // Make the class visible
 module.exports = AccountEntry;

@@ -19,7 +19,8 @@ angular
     'angular-loading-bar',
     'toaster',
     'ui.mask',
-    'ngDialog'
+    'ngDialog',
+    'ng-currency'
   ])
   .config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
 
@@ -152,6 +153,9 @@ angular
           },
           conditions: function(Util){
             return new Util().getApiData('CONDITION');
+          },
+          items: function (Item) {
+            return new Item().find();
           }
         }
     })
