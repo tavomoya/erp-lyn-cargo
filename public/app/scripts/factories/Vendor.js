@@ -43,5 +43,11 @@ app.factory('Vendor', function ($http, Data, $q, $state) {
 		return Vendor.super.save.call(this);
 	};
 
+	Vendor.prototype.go = function (id) {
+		$state.go('dashboard.vendor', {
+			id: id
+		});
+	};
+
 	return Vendor;
 });

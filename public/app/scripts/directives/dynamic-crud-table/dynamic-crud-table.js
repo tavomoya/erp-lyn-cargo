@@ -30,7 +30,7 @@ angular.module('erpLynCargoApp')
 							: new Port();
 
 				$scope.getContent = function (params) {
-					
+
 					$scope.modelToUse.find({}, params)
 					.then(function (res) {
 						$scope.content = res;
@@ -56,7 +56,7 @@ angular.module('erpLynCargoApp')
 						.closePromise.then(function (res) {
 							if (res.value._id) {
 								$scope.content.push(res.value)
-								toaster.pop('success', $scope.title + ' Guardado', 'El '+ $scope.title+ ' se ha guardado satisfactorimente');	
+								toaster.pop('success', $scope.title + ' Guardado', 'El '+ $scope.title+ ' se ha guardado satisfactorimente');
 							};
 						});
 					} else {
@@ -76,7 +76,7 @@ angular.module('erpLynCargoApp')
 						.closePromise.then(function (res) {
 							if (res.value._id) {
 								$scope.content.push(res.value)
-								toaster.pop('success', $scope.title + ' Guardado', 'El '+ $scope.title+ ' se ha guardado satisfactorimente');	
+								toaster.pop('success', $scope.title + ' Guardado', 'El '+ $scope.title+ ' se ha guardado satisfactorimente');
 							};
 						});
 					}
@@ -119,7 +119,7 @@ angular.module('erpLynCargoApp')
 						});
 					}
 				};
-				
+
 				$scope.prevPageDisabled = function () {
 					return $scope.currentPage === 1 ? "disabled" : "";
 				};
@@ -127,7 +127,7 @@ angular.module('erpLynCargoApp')
 				$scope.nextPageDisabled = function () {
 					return $scope.currentPage === $scope.totalPages ? "disabled" : "";
 				};
-				
+
 				$scope.prevPage = function () {
 					if ($scope.currentPage > 1) {
 						$scope.currentPage--;
@@ -143,15 +143,14 @@ angular.module('erpLynCargoApp')
 						$scope.getContent($scope.params);
 					}
 				};
-				
+
 				$scope.search = function (_string) {
 					$scope.params.search = _string;
-					console.log('hola :) ', $scope.params, _string)
 					$scope.modelToUse.count(null, $scope.params)
 					.then(function (res) {
 						var count = res.data.data;
 						$scope.totalPages = count < $scope.params.limit ? 1 : Math.ceil(count / $scope.params.limit);
-						$scope.getContent($scope.params);					
+						$scope.getContent($scope.params);
 					})
 					.catch(function (err) {
 						console.log('error', err);
@@ -163,7 +162,7 @@ angular.module('erpLynCargoApp')
 				.then(function (res) {
 					var count = res.data.data;
 					$scope.totalPages = count < $scope.params.limit ? 1 : Math.ceil(count / $scope.params.limit);
-					$scope.getContent($scope.params);					
+					$scope.getContent($scope.params);
 				})
 				.catch(function (err) {
 					console.log('error', err);

@@ -43,5 +43,11 @@ app.factory('Agent', function ($http, Data, $q, $state) {
 		return Agent.super.save.call(this);
 	};
 
+	Agent.prototype.go = function (id) {
+		$state.go('dashboard.agemt', {
+			id: id
+		});
+	};
+
 	return Agent;
 });

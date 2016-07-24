@@ -2,8 +2,8 @@
 
 var app = angular.module('erpLynCargoApp');
 
-app.controller('ItemCtrl', function ($scope, $state, Item, itemTypes, toaster, accounts) {
-  
+app.controller('ItemCtrl', function ($scope, $state, Item, itemTypes, toaster, accounts, $stateParams) {
+
   $scope.item = new Item();
   $scope.itemTypes = itemTypes;
   $scope.accounts = accounts;
@@ -23,7 +23,21 @@ app.controller('ItemCtrl', function ($scope, $state, Item, itemTypes, toaster, a
   };
 
   $scope.goBack = function () {
+    history.back();
+  };
 
-  }
+  var fill = function (id) {
+		$scope.item.findById(id)
+		.then(function (res) {
+			$scope.item = angular.copy(res.data);
+		})
+		.catch(function (err) {
+			console.log('Got an error', err);
+		});
+	};
+
+	if ($stateParams.id) {
+		fill($stateParams.id);
+	};
 
 });
