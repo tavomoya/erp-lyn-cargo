@@ -11,7 +11,7 @@
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=1">
                     <li ng-class="{active: selectedMenu=='client'}">
-                        <a ui-sref="dashboard.client" ng-click="selectedMenu='client'">Cliente</a>
+                        <a ui-sref="dashboard.clientList" ng-click="selectedMenu='client'">Cliente</a>
                     </li>
                     <li ng-class="{active: selectedMenu=='vendor'}">
                         <a ui-sref="dashboard.vendor" ng-click="selectedMenu='vendor'">Proveedor</a>
@@ -20,7 +20,7 @@
                         <a ui-sref="dashboard.agent" ng-click="selectedMenu='agent'">Agente</a>
                     </li>
                     <li ng-class="{active: selectedMenu=='employee'}">
-                        <a ui-sref="dashboard.employee" ng-click="selectedMenu='employee'">Empleado</a>
+                        <a ui-sref="dashboard.employeeList" ng-click="selectedMenu='employee'">Empleado</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -31,8 +31,8 @@
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
                     <li ng-class="{active: selectedMenu=='item'}">
-                        <a ui-sref="dashboard.item" ng-click="selectedMenu='item'">Items</a>
-                    </li>  
+                        <a ui-sref="dashboard.itemList" ng-click="selectedMenu='item'">Items</a>
+                    </li>
                     <li ng-class="{active: selectedMenu=='account'}">
                         <a ui-sref="dashboard.account" ng-click="selectedMenu='account'">Cuentas Contables</a>
                     </li>
@@ -41,7 +41,7 @@
                     </li>
                     <li ng-class="{active: selectedMenu=='bill'}">
                         <a ui-sref="dashboard.bill" ng-click="selectedMenu='bill'">Facturacion de Proveedores</a>
-                    </li> 
+                    </li>
                     <li ng-class="{active: selectedMenu=='client_statement'}">
                         <a ui-sref="dashboard.client_statement" ng-click="selectedMenu='client_statement'">Estado de Cuenta - Clientes</a>
                     </li>
@@ -58,12 +58,12 @@
             <li ng-class="{active:collapseVar==3}">
                 <a href="" ng-click="check(3)"><i class="fa fa-files-o fa-fw"></i> Operaciones <span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=3">       
+                <ul class="nav nav-second-level" collapse="collapseVar!=3">
                     <li>
                         <a ui-sref="dashboard.shipment" ng-click="selectedMenu='shipment'">Expediente</a>
                     </li>
                     <li ng-class="{active: selectedMenu=='quote'}">
-                        <a ui-sref="dashboard.quote" ng-click="selectedMenu='quote'">Cotizaci&oacute;n</a>
+                        <a ui-sref="dashboard.quotationList" ng-click="selectedMenu='quote'">Cotizaci&oacute;n</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -72,7 +72,7 @@
             <li ng-class="{active:collapseVar==4}">
                 <a href="" ng-click="check(4)"><i class="fa fa-group fa-fw"></i> Recursos Humanos <span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=4">       
+                <ul class="nav nav-second-level" collapse="collapseVar!=4">
                     <li>
                         <a ui-sref="dashboard.payroll" ng-click="selectedMenu='payroll'">N&oacute;mina</a>
                     </li>
@@ -83,7 +83,7 @@
             <li ng-class="{active:collapseVar==5}">
                 <a href="" ng-click="check(5)"><i class="fa fa-gear fa-fw"></i> Configuraci&oacute;n <span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=5">       
+                <ul class="nav nav-second-level" collapse="collapseVar!=5">
                     <li>
                         <a ui-sref="dashboard.accountType" ng-click="selectedMenu='accountType'">Tipo de Cuenta</a>
                     </li>
@@ -102,7 +102,4 @@
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
-</div> 
-
-
-
+</div>

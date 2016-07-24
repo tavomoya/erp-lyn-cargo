@@ -43,5 +43,11 @@ app.factory('Employee', function ($http, Data, $q, $state) {
 		return Employee.super.save.call(this);
 	};
 
+	Employee.prototype.go = function (id) {
+		$state.go('dashboard.employee', {
+			id: id
+		});
+	};
+
 	return Employee;
 });

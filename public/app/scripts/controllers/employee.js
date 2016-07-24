@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('erpLynCargoApp');
-app.controller('EmployeeCtrl', function($scope, addressData, currencies, Employee, toaster) {
+app.controller('EmployeeCtrl', function($scope, addressData, currencies, Employee, toaster, $stateParams) {
 
 	// Setting initial data
 	$scope.activeTab = 1;
@@ -13,7 +13,7 @@ app.controller('EmployeeCtrl', function($scope, addressData, currencies, Employe
 	$scope.employee = new Employee();
 	$scope.employee.status = 1;
 	$scope.employee.documentType = $scope.documentTypes[0];
-	
+
 	$scope.saveEmployee = function (form) {
 		if (form.$invalid) {
 			return;
@@ -37,6 +37,24 @@ app.controller('EmployeeCtrl', function($scope, addressData, currencies, Employe
 
 	$scope.goBack = function () {
 		history.back();
-	}
+	};
+
+	var fill = function (id) {
+		$scope.employee.findById(id)
+		.then(function (res) {
+			console.log(res);
+			if (res.data.birthDate) {
+				res.data.birthDate = new Date(res.data.birthDate);
+			};
+			$scope.employee = angular.copy(res.data);
+		})
+		.catch(function (err) {
+			console.log('Got an error', err);
+		});
+	};
+
+	if ($stateParams.id) {
+		fill($stateParams.id);
+	};
 
 });

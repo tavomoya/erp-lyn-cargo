@@ -10,7 +10,7 @@ angular.module('erpLynCargoApp')
 				type: '=',
 				currencies: '='
 			},
-			controller: function ($scope, toaster, Util, Client, Vendor, Agent) {
+			controller: function ($scope, toaster, Util, Client, Vendor, Agent, $stateParams) {
 				// Initial Data
 				$scope.entity = ($scope.type === 'Cliente') ? new Client() :
 						($scope.type === 'Proveedor') ? new Vendor() : new Agent();
@@ -20,6 +20,7 @@ angular.module('erpLynCargoApp')
 				$scope.entity.type = 'Persona';
 				$scope.entity.status = 1;
 				$scope.ngModel = $scope.entity;
+
 				new Util().getAddressData()
 				.then(function (res) {
 					$scope.countries = res.data.countries;
@@ -49,6 +50,24 @@ angular.module('erpLynCargoApp')
 							'Ocurrio un error al guardar el '+$scope.type
 						);
 					})
+				};
+
+				var fill = function (id) {
+					$scope.entity.findById(id)
+					.then(function (res) {
+						console.log(res);
+						if (res.data.birthDate) {
+							res.data.birthDate = new Date(res.data.birthDate);
+						};
+						$scope.entity = angular.copy(res.data);
+					})
+					.catch(function (err) {
+						console.log('Got an error', err);
+					});
+				};
+
+				if ($stateParams.id) {
+					fill($stateParams.id);
 				};
 
 			}

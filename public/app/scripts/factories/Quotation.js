@@ -43,5 +43,11 @@ app.factory('Quotation', function ($http, Data, $q, $state) {
 		return Quotation.super.save.call(this);
 	};
 
+	Quotation.prototype.go = function (id) {
+		$state.go('dashboard.quote', {
+			id: id
+		});
+	};
+
 	return Quotation;
 });
