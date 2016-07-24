@@ -43,5 +43,11 @@ app.factory('Account', function ($http, Data, $q, $state) {
 		return Account.super.save.call(this);
 	};
 
+	Account.prototype.go = function (id) {
+		$state.go('dashboard.account', {
+			id: id
+		});
+	};
+
 	return Account;
 });

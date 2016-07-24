@@ -26,7 +26,21 @@ app.controller('QuoteCtrl', function($scope, $state, Quotation, clients, currenc
     };
 
     $scope.goBack = function () {
+			history.back();
+    };
 
-    }
+		var fill = function (id) {
+			$scope.quote.findById(id)
+			.then(function (res) {
+				$scope.quote = angular.copy(res.data);
+			})
+			.catch(function (err) {
+				console.log('Got an error', err);
+			});
+		};
+
+		if ($stateParams.id) {
+			fill($stateParams.id);
+		};
 
 });

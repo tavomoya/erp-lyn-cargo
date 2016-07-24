@@ -43,5 +43,11 @@ app.factory('Item', function ($http, Data, $q, $state) {
 		return Item.super.save.call(this);
 	};
 
+	Item.prototype.go = function (id) {
+		$state.go('dashboard.item', {
+			id: id
+		});
+	};
+
 	return Item;
 });

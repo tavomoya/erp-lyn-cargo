@@ -10,14 +10,14 @@ angular.module('erpLynCargoApp')
             if (_data.type === 'Persona') {
               _data.fullName = _data.firstName + ' ' + _data.lastName;
             } else {
-              _data.fullName = _data.name;
+              _data.fullName = _data.companyName;
             }
             return _data;
           });
         } else {
           return data.type === 'Persona' ?
-              data.firstName + ' ' + data.lastName : data.name;
-        } 
+              data.firstName + ' ' + data.lastName : data.companyName;
+        }
       }
     }
   });

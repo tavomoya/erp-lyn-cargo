@@ -4,6 +4,7 @@ var q = require('q');
 var key = require('../keys');
 var converter = require('currency-converter')({CLIENTKEY: key})
 var cron = require('cron').CronJob;
+var Rate = require('rates.do');
 
 // Class constructor
 function Job (db) {
@@ -14,6 +15,7 @@ function Job (db) {
 Job.prototype.dollarsToPesos = function () {
     var _this = this;
     var collection = _this.db.collection('RATE');
+    var rates = new Rate();
 
     var _job = new cron('0 0 0 * * *',
     function () {
@@ -22,30 +24,22 @@ Job.prototype.dollarsToPesos = function () {
         console.log('[*] dollarsToPesos');
         console.log('[*] A las: ' + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds());
         console.log('[*] El dia: ' + startDate.getDate() + "/" + (parseInt(startDate.getMonth()) + 1) + "/" + startDate.getFullYear());
-       
-        converter.rates('USD', 'DOP')
-        .then(function (rate) {
-            collection.insert({
-                from: 'USD',
-                to: 'DOP',
-                rate: rate
-            }, function (err, r) {
-                if (err) {
-                    console.log('there was an error');
-                };
 
-                if (r) {
-                    var endDate = new Date();
-                    console.log('[*] Cron job finished succesfully');
-                    console.log('[*] dollarsToPesos');
-                    console.log('[*] A las: ' + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds());
-                    console.log('[*] El dia: ' + endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1) + "/" + endDate.getFullYear());
-                    return;
-                } else {
-                    console.log('there was an error');
-                };
-            })
-        });
+        rates.getRatesFromAllBanks()
+        .then(function (_rates) {
+          collection.insert({
+            from: 'USD',
+            to: 'DOP',
+            date: new Date(),
+            rate: _rates.dollar_mean.selling_rate
+          }, function (err, r) {
+            if (err) {
+              console.log('There was an error saving the rate');
+            };
+
+            return;
+          });
+        })
 
     }, null, true);
     _job.start();
@@ -55,6 +49,7 @@ Job.prototype.dollarsToPesos = function () {
 Job.prototype.euroToPesos = function () {
     var _this = this;
     var collection = _this.db.collection('RATE');
+    var rates = new Rate();
 
     var _job = new cron('0 0 0 * * *',
     function () {
@@ -63,30 +58,22 @@ Job.prototype.euroToPesos = function () {
         console.log('[*] euroToPesos');
         console.log('[*] A las: ' + startDate.getHours() + ":" + startDate.getMinutes() + ":" + startDate.getSeconds());
         console.log('[*] El dia: ' + startDate.getDate() + "/" + (parseInt(startDate.getMonth()) + 1) + "/" + startDate.getFullYear());
-       
-        converter.rates('EUR', 'DOP')
-        .then(function (rate) {
-            collection.insert({
-                from: 'EUR',
-                to: 'DOP',
-                rate: rate
-            }, function (err, r) {
-                if (err) {
-                    console.log('there was an error');
-                };
 
-                if (r) {
-                    var endDate = new Date();
-                    console.log('[*] Cron job finished succesfully');
-                    console.log('[*] euroToPesos');
-                    console.log('[*] A las: ' + endDate.getHours() + ":" + endDate.getMinutes() + ":" + endDate.getSeconds());
-                    console.log('[*] El dia: ' + endDate.getDate() + "/" + (parseInt(endDate.getMonth()) + 1) + "/" + endDate.getFullYear());
-                    return;
-                } else {
-                    console.log('there was an error');
-                };
-            })
-        });
+        rates.getRatesFromAllBanks()
+        .then(function (_rates) {
+          collection.insert({
+            from: 'EUR',
+            to: 'DOP',
+            date: new Date(),
+            rate: _rates.euro_mean.selling_rate
+          }, function (err, r) {
+            if (err) {
+              console.log('There was an error saving the rate');
+            };
+
+            return;
+          });
+        })
 
     }, null, true);
     _job.start();

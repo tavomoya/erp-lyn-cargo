@@ -19,7 +19,8 @@ angular
     'angular-loading-bar',
     'toaster',
     'ui.mask',
-    'ngDialog'
+    'ngDialog',
+    'ng-currency'
   ])
   .config(['$stateProvider','$urlRouterProvider', function ($stateProvider,$urlRouterProvider) {
 
@@ -41,7 +42,7 @@ angular
     })
       .state('dashboard.client',{
         templateUrl:'views/pages/client.html',
-        url:'/client',
+        url:'/client?id',
         controller: 'ClientCtrl',
         resolve: {
           currencies: function (Util) {
@@ -71,7 +72,7 @@ angular
     })
     .state('dashboard.employee',{
         templateUrl:'views/pages/employee.html',
-        url:'/employee',
+        url:'/employee?id',
         controller: 'EmployeeCtrl',
         resolve: {
           addressData: function (Util) {
@@ -84,12 +85,12 @@ angular
     })
     .state('dashboard.item',{
         templateUrl:'views/pages/item.html',
-        url:'/item',
+        url:'/item?id',
         controller: 'ItemCtrl',
         resolve: {
           itemTypes: function (ItemType) {
             return new ItemType().find();
-          }, 
+          },
           accounts: function (Account) {
             return new Account().find();
           }
@@ -130,7 +131,7 @@ angular
           },
           conditions: function(Util){
             return new Util().getApiData('CONDITION');
-          }, 
+          },
           items: function (Item) {
             return new Item().find();
           }
@@ -152,8 +153,26 @@ angular
           },
           conditions: function(Util){
             return new Util().getApiData('CONDITION');
+          },
+          items: function (Item) {
+            return new Item().find();
           }
         }
+    })
+    .state('dashboard.clientList',{
+        templateUrl:'views/pages/clientList.html',
+        url:'/clientList',
+        controller: 'ClientListCtrl'
+    })
+    .state('dashboard.employeeList',{
+        templateUrl:'views/pages/employeeList.html',
+        url:'/employeeList',
+        controller: 'EmployeeListCtrl'
+    })
+    .state('dashboard.itemList',{
+        templateUrl:'views/pages/itemList.html',
+        url:'/itemList',
+        controller: 'ItemListCtrl'
     })
     .state('dashboard.payroll',{
         templateUrl:'views/pages/payroll.html',

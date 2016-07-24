@@ -38,9 +38,9 @@ app.factory('Data', function ($http, $q, $rootScope) {
 			query = {};
 		};
 
-		$http.post(this.apiPath + '/find', 
+		$http.post(this.apiPath + '/find',
 		{
-			obj: query, 
+			obj: query,
 			opts: options
 		})
 		.then(function (res) {
@@ -71,6 +71,8 @@ app.factory('Data', function ($http, $q, $rootScope) {
 	Data.prototype.findById = function(id) {
 		var deferred = $q.defer();
 		var _this = this;
+		var _constructor = _this.constructor;
+
 
 		if (!id) {
 			deferred.reject({error: 'Debe mandar un id'});
@@ -81,10 +83,10 @@ app.factory('Data', function ($http, $q, $rootScope) {
 
 				if (Array.isArray(res)) {
 					_res = res.map(function (obj) {
-						return new _this(obj);
+						return new _constructor(obj);
 					});
 				} else {
-					_res = new _this(res);
+					_res = new _constructor(res);
 				};
 
 				deferred.resolve(_res);

@@ -5,6 +5,7 @@ var app = angular.module('erpLynCargoApp');
 app.controller('InvoiceCtrl', function ($scope, $state, Document, clients, accounts, paymentMethods, conditions, toaster, items) {
   
   $scope.invoice = new Document();
+  $scope.invoice.documentType = 1;
   $scope.clients = clients;
   $scope.accounts = accounts;
   $scope.paymentMethods = paymentMethods.data;

@@ -43,5 +43,11 @@ app.factory('Client', function ($http, Data, $q, $state) {
 		return Client.super.save.call(this);
 	};
 
+	Client.prototype.go = function (id) {
+		$state.go('dashboard.client', {
+			id: id
+		});
+	};
+
 	return Client;
 });
