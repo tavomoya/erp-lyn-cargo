@@ -61,7 +61,11 @@ Document.prototype.insert = function (_document) {
     
     this.data.insert(_document)
     .then(function (res) {
-        return _this.accountEntry.invoiceAccountEntries(res[0]);
+        var accountEntryFn = (_document.documentType === 1) ?
+            _this.accountEntry.invoiceAccountEntries(res[0]) :
+            _this.accountEntry.billAccountEntries(res[0]);
+            
+        return accountEntryFn;
     })
     .then(function (obj) {
         deferred.resolve(obj);
